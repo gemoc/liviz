@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+    </style>
+
+    <style type="text/css">
+        h2 {
+            font-family: 'PT Sans', sans-serif;
+        }
+    </style>
+
+
+    <style>
+        .overlay {
+            fill: none;
+            pointer-events: all;
+        }
+
+        .focus circle {
+            fill: steelblue;
+        }
+
+        .focus text {
+            font-size: 14px;
+        }
+
+        .tooltip {
+            fill: white;
+            stroke: #000;
+        }
+
+        .tooltip-date,
+        .tooltip-likes {
+            font-weight: bold;
+        }
+    </style>
+
+
+    <meta charset="utf-8" />
+
+    <script src="js/lib/stomp.js"></script>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+
+
+    <script src="js/plot/plotter.js"></script>
+    <script src="js/plot/graph.js"></script>
+    <script src="js/plot/lineChart.js"></script>
+    <script src="js/network/connection.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel='stylesheet' type='text/css'>
+
+
+</head>
+
+<body>
+    <center>
+        <h2>Variable View</h2>
+
+    </center>
+    <div id="container"></div>
+    <div id="legend"></div>
+    <div id="chart"></div>
+
+    <script>
+
+        var connection = new Connection();
+        connection.connect()
+
+    </script>
+
+</html>
