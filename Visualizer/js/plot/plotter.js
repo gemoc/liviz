@@ -24,11 +24,7 @@ class Plotter
             if (graph != null)
             {
                 graph.initialize();
-
                 Plotter.graphs.set(graph.name, graph);
-
-                console.log(Plotter.graphs);
-                console.log("end.");
             }
         }
     }
