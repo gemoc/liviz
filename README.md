@@ -1,4 +1,4 @@
 # liviz
 Framework for plotting during a debugging session
 
-![](https://pasteboard.co/KcwmZFW.png)
+![](https://i.ibb.co/G2pbQbV/index.png)
