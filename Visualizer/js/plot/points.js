@@ -68,7 +68,7 @@ Points.prototype.redraw = function ()
     {
         data = this.data.get(variableName);
 
-        var color = meta["variables"][variableName];
+        var color = Settings.getVariableColor(variableName);
 
         this.svg.selectAll("points")
             .data(data)
@@ -89,7 +89,7 @@ Points.prototype.redraw = function ()
 Points.prototype.append = function (variableName, obj)
 {
     var meta = this.getMetadata();
-    var color = meta['variables'][variableName];
+    var color = Settings.getVariableColor(variableName);// meta['variables'][variableName];
     var data = []
 
     data.push(obj);
@@ -122,18 +122,11 @@ Points.prototype.addToolTip = function (margin, width)
 
     var svg = this.svg;
 
-
-
-
-
-
-
     d3.select("#container").on("mousemove", function ()
     {
         // Récupération de la position X & Y de la souris.
         var mouse_x = d3.mouse(this)[0];
         var mouse_y = d3.mouse(this)[1];
-
 
         // Si la position de la souris est en dehors de la zone du graphique, on arrête le traitement
         if (mouse_x < margin.left || mouse_x > (width + margin.left) || mouse_y < margin.top || mouse_y > (400 - margin.bottom))
@@ -143,10 +136,8 @@ Points.prototype.addToolTip = function (margin, width)
 
         var circleSet = svg.selectAll("circle");
 
-        circleSet.on("mouseover", function (obj, indice, it)
+        circleSet.on("mouseover", function (obj, indice)
         {
-            console.log(obj);
-
             div.style("opacity", .9);
             div.style("left", (d3.event.pageX + 30) + "px")
                 .style("top", (d3.event.pageY - 60) + "px")
