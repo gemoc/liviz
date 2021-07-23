@@ -56,8 +56,7 @@ Graph.prototype.rescale = function (xMin, xMax, yMin, yMax)
     this.xAxis.transition().duration(1000).call(d3.axisBottom(this.x));
 
     var x = this.x;
-    var y = this.y;
-
+    var y = this.y; 0
     this.y.domain([yMin, yMax])
     this.yAxis.transition().duration(1000).call(d3.axisLeft(this.y))
 

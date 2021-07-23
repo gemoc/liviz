@@ -14,6 +14,8 @@ Points.prototype.initialize = function ()
         width = document.getElementById("container").offsetWidth * 0.95 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
+    var [xMin, xMax, yMin, yMax] = Settings.getAxisBounds();
+
     // append the svg object to the body of the page
     this.svg = d3.select("#container")
         .append("svg")
@@ -24,6 +26,7 @@ Points.prototype.initialize = function ()
             "translate(" + margin.left + "," + margin.top + ")");
 
     this.x = d3.scaleLinear()
+        .domain([xMin, xMax])
         .range([0, width]);
 
     this.xAxis = this.svg.append("g")
@@ -32,6 +35,7 @@ Points.prototype.initialize = function ()
 
     // Add Y axis
     this.y = d3.scaleLinear()
+        .domain([yMin, yMax])
         .range([height, 0]);
 
     this.yAxis = this.svg.append("g")
@@ -41,6 +45,12 @@ Points.prototype.initialize = function ()
 
     this.addLegend();
     this.addToolTip();
+
+    this.svg.append("defs").append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
 
 }
 Points.prototype.redraw = function ()
@@ -67,6 +77,7 @@ Points.prototype.redraw = function ()
             .attr("fill", color)
             .attr("stroke", "none")
             .attr("cx", function (d) { return x(d.date) })
+            .attr("clip-path", "url(#clip)")
             .attr("cy", function (d) { return y(d.close) })
             .attr("r", 3);
 
@@ -80,6 +91,7 @@ Points.prototype.append = function (variableName, obj)
     var meta = this.getMetadata();
     var color = meta['variables'][variableName];
     var data = []
+
     data.push(obj);
 
     var x = this.x;
@@ -88,13 +100,13 @@ Points.prototype.append = function (variableName, obj)
     // Add the line
     this.svg.selectAll("points")
         .data(data)
-
         .enter()
         .append("circle")
         .attr("fill", color)
         .attr("stroke", "none")
         .attr("cx", function (d) { return x(d.date) })
         .attr("cy", function (d) { return y(d.close) })
+        .attr("clip-path", "url(#clip)")
         .attr("r", 3)
 }
 
