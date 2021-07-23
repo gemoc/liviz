@@ -94,10 +94,9 @@ Graph.prototype.addLegend = function ()
     i = 0;
 
 
-    for (var variableName in variables) 
+    for (const variableName of variables) 
     {
-        var color = graph['variables'][variableName];
-
+        console.log(variableName);
         var input = d3.select("#legend")
 
             .append("input")

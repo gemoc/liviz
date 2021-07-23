@@ -8,7 +8,7 @@ channel.queue_declare(queue='config')
 channel.queue_declare(queue='myGraph')
 
 
-config = '{"graphs":[{"variables":{"maVariable":"#3498db","var2":"red"},"window":"0","name":"myGraph","x":"time","type":"points"}]}' # {"variables":{"maVariable2":"#3498db"},"name":"graph2","x":"time","type":"boxes"}
+config = '{"graphs":[{"variables":["maVariable","var2"],"window":"0","name":"myGraph","x":"time","type":"points"}]}' 
 
 channel.basic_publish(exchange='',  
                       routing_key='config',

@@ -64,7 +64,7 @@ Points.prototype.redraw = function ()
     var x = this.x;
     var y = this.y;
 
-    for (var variableName in variables) 
+    for (const variableName of variables) 
     {
         data = this.data.get(variableName);
 
@@ -88,8 +88,7 @@ Points.prototype.redraw = function ()
 
 Points.prototype.append = function (variableName, obj)
 {
-    var meta = this.getMetadata();
-    var color = Settings.getVariableColor(variableName);// meta['variables'][variableName];
+    var color = Settings.getVariableColor(variableName);
     var data = []
 
     data.push(obj);
@@ -139,6 +138,8 @@ Points.prototype.addToolTip = function (margin, width)
         circleSet.on("mouseover", function (obj, indice)
         {
             div.style("opacity", .9);
+            div.style("display", "block");
+
             div.style("left", (d3.event.pageX + 30) + "px")
                 .style("top", (d3.event.pageY - 60) + "px")
                 .html("<b>x : </b>" + obj.date + "<br>"
@@ -148,15 +149,7 @@ Points.prototype.addToolTip = function (margin, width)
 
         }).on("mouseout", function ()
         {
-            var mouse_x = d3.mouse(this)[0];
-            var mouse_y = d3.mouse(this)[1];
-
-            // Si la position de la souris est en dehors de la zone du graphique, on masque la ligne et le tooltip
-            if (mouse_x < margin.left || mouse_x > (width + margin.left) || mouse_y < margin.top || mouse_y > (400 - margin.bottom))
-            {
-                div.style("opacity", 0);
-
-            }
+            div.style("display", "none");
         })
 
 
