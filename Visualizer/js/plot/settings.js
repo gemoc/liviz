@@ -8,8 +8,6 @@ class Settings
     }
     static getVariableColor(variableName)
     {
-        console.log("Vname is " + variableName);
-
         return document.getElementById("color-" + variableName).value;
     }
     static bindEvents()

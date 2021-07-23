@@ -81,7 +81,7 @@ Graph.prototype.addSettings = function ()
 }
 Graph.prototype.addLegend = function ()
 {
-    const defaultColors = ["#FF0000", "#0000ff"];
+    const defaultColors = ["#FF0000", "#0000ff", "#008000", "#992277", "#11ffee"];
 
     const margin = { top: 10, right: 30, bottom: 30, left: 60 },
         width = 300,
@@ -96,7 +96,6 @@ Graph.prototype.addLegend = function ()
 
     for (const variableName of variables) 
     {
-        console.log(variableName);
         var input = d3.select("#legend")
 
             .append("input")
