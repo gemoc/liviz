@@ -39,29 +39,8 @@ Points.prototype.initialize = function ()
         .call(d3.axisLeft(this.y));
 
 
-    var meta = this.getMetadata();
-
-    var variables = meta['variables'];
-
-    for (var variableName in variables) 
-    {
-        data = []
-        var color = meta["variables"][variableName];
-
-        this.svg.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", color)
-            .attr("stroke-width", 4)
-            .attr("d", d3.line()
-                .x(function (d) { return x(d.date) })
-                .y(function (d) { return y(d.close) })
-            )
-
-    }
-
-
     this.addLegend();
+    this.addToolTip();
 
 }
 Points.prototype.redraw = function ()
@@ -80,7 +59,6 @@ Points.prototype.redraw = function ()
         data = this.data.get(variableName);
 
         var color = meta["variables"][variableName];
-
 
         this.svg.selectAll("points")
             .data(data)
@@ -124,10 +102,12 @@ Points.prototype.append = function (variableName, obj)
 
 
 
-
-
 Points.prototype.addToolTip = function ()
 {
+    const margin = { top: 50, right: 30, bottom: 30, left: 60 },
+        width = document.getElementById("container").offsetWidth * 0.95 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
 
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
@@ -142,6 +122,11 @@ Points.prototype.addToolTip = function ()
         .attr("x2", 0)
         .attr("y2", height)
         .style("opacity", 0);
+
+
+    var x = this.x;
+    var y = this.y;
+    var data = this.data;
 
     d3.select("#container").on("mousemove", function ()
     {
@@ -166,7 +151,7 @@ Points.prototype.addToolTip = function ()
 
         // Le revert est précis à la milliseconde, ce qui n'est pas le cas de nos données
 
-        var entry = Plotter.data.get("myGraph").get("var2");
+        var entry = data.get("var2");
 
         if (typeof entry === "undefined")
         {
@@ -179,8 +164,8 @@ Points.prototype.addToolTip = function ()
         div.style("left", (d3.event.pageX + 30) + "px")
             .style("top", (d3.event.pageY - 60) + "px")
             .html("<b>x : </b>" + selected + "<br>"
-                + "<b>maVariable : </b>" + -0.89 + "<br>"
-                + "<b>var2 : </b>" + 0.40940 + "<br>");
+                + "<b>maVariable : </b>Work in progress<br>"
+                + "<b>var2 : </b>Work in progress<br>");
     }).on("mouseout", function ()
     {
         var mouse_x = d3.mouse(this)[0];
