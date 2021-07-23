@@ -31,7 +31,7 @@ class Plotter
 
     static onReceive(graphName, variableName, obj)
     {
-        Plotter.graphs.get(graphName).append(variableName, obj);
+        Plotter.graphs.get(graphName).onReceive(variableName, obj);
     }
 
     static createGraph(indice, graphData)
@@ -42,8 +42,8 @@ class Plotter
 
         switch (graphType)
         {
-            case 'chart':
-                return new LineChart(graphName, indice);
+            case 'points':
+                return new Points(graphName, indice);
             default:
                 console.log("Unhandled graph type : " + graphType);
                 break;

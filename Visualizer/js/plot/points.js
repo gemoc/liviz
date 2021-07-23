@@ -1,13 +1,14 @@
 
-var LineChart = function (name, indice)
+var Points = function (name, indice)
 {
     Graph.apply(this, arguments);
 };
 
-LineChart.prototype = Object.create(Graph.prototype);
-LineChart.prototype.constructor = LineChart;
+Points.prototype = Object.create(Graph.prototype);
+Points.prototype.constructor = Points;
 
-LineChart.prototype.initialize = function ()
+
+Points.prototype.initialize = function ()
 {
     const margin = { top: 50, right: 30, bottom: 30, left: 60 },
         width = document.getElementById("container").offsetWidth * 0.95 - margin.left - margin.right,
@@ -22,12 +23,10 @@ LineChart.prototype.initialize = function ()
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-
-
     this.x = d3.scaleLinear()
         .range([0, width]);
 
-    this.svg.append("g")
+    this.xAxis = this.svg.append("g")
         .attr("transform", "translate(0," + (height + 5) + ")")
         .call(d3.axisBottom(this.x));
 
@@ -35,7 +34,7 @@ LineChart.prototype.initialize = function ()
     this.y = d3.scaleLinear()
         .range([height, 0]);
 
-    this.svg.append("g")
+    this.yAxis = this.svg.append("g")
         .attr("transform", "translate(-5,0)")
         .call(d3.axisLeft(this.y));
 
@@ -59,7 +58,31 @@ LineChart.prototype.initialize = function ()
                 .y(function (d) { return y(d.close) })
             )
 
-        this.svg.selectAll("myCircles")
+    }
+
+
+    this.addLegend();
+
+}
+Points.prototype.redraw = function ()
+{
+    this.svg.selectAll("circle").remove();
+
+    var meta = this.getMetadata();
+
+    var variables = meta['variables'];
+
+    var x = this.x;
+    var y = this.y;
+
+    for (var variableName in variables) 
+    {
+        data = this.data.get(variableName);
+
+        var color = meta["variables"][variableName];
+
+
+        this.svg.selectAll("points")
             .data(data)
             .enter()
             .append("circle")
@@ -67,39 +90,27 @@ LineChart.prototype.initialize = function ()
             .attr("stroke", "none")
             .attr("cx", function (d) { return x(d.date) })
             .attr("cy", function (d) { return y(d.close) })
-            .attr("r", 3)
+            .attr("r", 3);
+
     }
 
 
-    this.addLegend();
-
 }
-LineChart.prototype.append = function (variableName, obj)
+
+Points.prototype.append = function (variableName, obj)
 {
     var meta = this.getMetadata();
     var color = meta['variables'][variableName];
-    data = []
+    var data = []
     data.push(obj);
 
     var x = this.x;
     var y = this.y;
 
-    this.svg.append("path")
-        .enter()
-        .datum(data)
-        .data(data)
-        .exit()
-        .attr("fill", "none")
-        .attr("stroke", color)
-        .attr("stroke-width", 4)
-        .attr("d", d3.line()
-            .x(function (d) { return x(d.date) })
-            .y(function (d) { return y(d.close) })
-        )
-
     // Add the line
-    this.svg.selectAll("myCircles")
+    this.svg.selectAll("points")
         .data(data)
+
         .enter()
         .append("circle")
         .attr("fill", color)
@@ -107,8 +118,6 @@ LineChart.prototype.append = function (variableName, obj)
         .attr("cx", function (d) { return x(d.date) })
         .attr("cy", function (d) { return y(d.close) })
         .attr("r", 3)
-
-
 }
 
 
@@ -117,37 +126,7 @@ LineChart.prototype.append = function (variableName, obj)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-LineChart.prototype.addToolTip = function ()
+Points.prototype.addToolTip = function ()
 {
 
     var div = d3.select("body").append("div")

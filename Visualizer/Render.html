@@ -52,8 +52,9 @@
 
 
     <script src="js/plot/plotter.js"></script>
+    <script src="js/plot/settings.js"></script>
     <script src="js/plot/graph.js"></script>
-    <script src="js/plot/lineChart.js"></script>
+    <script src="js/plot/points.js"></script>
     <script src="js/network/connection.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel='stylesheet' type='text/css'>
@@ -68,9 +69,33 @@
     </center>
     <div id="container"></div>
     <div id="legend"></div>
-    <div id="chart"></div>
+
+    <div id="settings" style="margin-left: 5%;">
+
+        <label for="name">X Axis</label>
+
+        <input type="number" value="0" id="xMin" size="10">&nbsp;to
+        <input type="number" value="1" id="xMax" min="1" size="10">
+
+
+        <label for="name">Y Axis</label>
+
+        <input type="number" value="0" id="yMin" size="10">&nbsp;to
+        <input type="number" value="1" id="yMax" min="1" size="10">
+
+
+
+        <button class="btn btn-primary" id="apply" type="button">
+            Apply
+        </button>
+
+
+
+    </div>
 
     <script>
+
+        Settings.bindEvents();
 
         var connection = new Connection();
         connection.connect()

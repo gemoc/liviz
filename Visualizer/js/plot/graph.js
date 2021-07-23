@@ -12,6 +12,9 @@ var Graph = function (name, indice)
     this.name = name;
     this.indice = indice;
 
+
+    this.data = new Map();
+
 };
 
 /**
@@ -22,6 +25,19 @@ Graph.prototype.initialize = function ()
     throw new Error("Abstract method!");
 }
 
+Graph.prototype.onReceive = function (variableName, obj)
+{
+    if (!this.data.has(variableName))
+    {
+        this.data.set(variableName, []);
+    }
+    else
+    {
+        var array = this.data.get(variableName);
+        array.push(obj);
+    }
+    this.append(variableName, obj);
+}
 /**
  @abstract
  */
@@ -29,11 +45,30 @@ Graph.prototype.append = function (variableName, obj)
 {
     throw new Error("Abstract method!");
 }
+Graph.prototype.redraw = function (variableName, obj)
+{
+    throw new Error("Abstract method!");
+}
+
+Graph.prototype.rescale = function (xMin, xMax, yMin, yMax)
+{
+    this.x.domain([xMin, xMax]);
+    this.xAxis.transition().duration(1000).call(d3.axisBottom(this.x));
+
+    var x = this.x;
+    var y = this.y;
+
+    this.y.domain([yMin, yMax])
+    this.yAxis.transition().duration(1000).call(d3.axisLeft(this.y))
+
+    this.redraw();
+}
 
 
 Graph.prototype.remove = function ()
 {
     d3.select("svg").remove();
+    this.data = new Map();
 }
 
 Graph.prototype.getMetadata = function ()
@@ -44,7 +79,7 @@ Graph.prototype.addLegend = function ()
 {
     const margin = { top: 10, right: 30, bottom: 30, left: 60 },
         width = 300,
-        height = 400 - margin.top - margin.bottom;
+        height = 100 - margin.top - margin.bottom;
 
     d3.select("#legend").select("svg").remove();
 
