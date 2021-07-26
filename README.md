@@ -1,8 +1,6 @@
 # Liviz
 
-Framework for plotting during a debugging session.
-
-Written in pure js.
+Framework for plotting during a debugging session. Written in pure JavaScript.
 
 ## Require
 
