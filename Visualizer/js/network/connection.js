@@ -10,25 +10,35 @@ class Connection
 
     on_receive(d)
     {
-        var graphName = d.headers.destination.replace("/queue/", "");
+        console.log(d.body);
 
-        var jsonData = JSON.parse(d.body);
+        var plotData = new PlotData(d.body);
 
-        var jsonKeys = Object.keys(jsonData);
-
-        var variableName = jsonKeys[0];
-
-        var targetField = jsonKeys[1];//  Object.keys[jsonData]
-
-        var yDelta = jsonData[variableName];
-
-        var xDelta = jsonData[targetField];
-
-        var obj =
+        if (!plotData.valid)
         {
-            date: xDelta,
-            close: yDelta,
+            console.log("Malformated Gnu plot data");
+            return;
         }
+
+        /*   var graphName = d.headers.destination.replace("/queue/", "");
+   
+           var jsonData = JSON.parse(d.body);
+   
+           var jsonKeys = Object.keys(jsonData);
+   
+           var variableName = jsonKeys[0];
+   
+           var targetField = jsonKeys[1];//  Object.keys[jsonData]
+   
+           var yDelta = jsonData[variableName];
+   
+           var xDelta = jsonData[targetField];
+   
+           var obj =
+           {
+               date: xDelta,
+               close: yDelta,
+           } */
 
         Plotter.onReceive(graphName, variableName, obj);
 

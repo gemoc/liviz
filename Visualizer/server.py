@@ -18,13 +18,10 @@ print("Sent Config")
 
 for x in range(0, 1000):
 
-    values = '{"var2":"'+str(np.sin(x))+'","time":"'+str(x*0.01)+'"}'
-    values2 = '{"maVariable":"'+str(np.cos(x))+'","time":"'+str(x*0.01)+'"}'
+    values = """   # var2          maVariable      time  
+    """+str(np.sin(x))+""" """+str(np.cos(x))+"""  """+str(x*0.01)
     
-    channel.basic_publish(exchange='',
-                      routing_key='myGraph',
-                      body=values2)
-
+    
     channel.basic_publish(exchange='',
                       routing_key='myGraph',
                       body=values)
