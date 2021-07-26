@@ -6,13 +6,10 @@ Written in pure js.
 
 ## Require
 
-
 * RabbitMQ 3.8.19
 * StompJs
 * D3Js v4
 * Bootstrap v5.0.1
-
-
 
 
 ## Incremental Plotter
@@ -26,19 +23,14 @@ This framework allows to display 2D curves in GNU Plot format (https://people.du
 
  In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
- ## Todo list
+ ## Incoming Features
 
 - [x] Scatter plot
 - [ ] Line chart
 - [ ] Box plot
-- [ ] Export in GNUPlot format
+- [ ] GNUPlot Export
+- [ ] SVG Export
 - [ ] Sliding Window
 - [x] Resizing axes (zoom, unzoom)
+- [ ] Smart data handling (caching, archiving, access etc)
 
-
- * 
- * Boxe plot
- * Resizing axes (zoom, unzoom)
- * Incremental display 
- * Export in GNUPlot format 
- * Sliding Window
