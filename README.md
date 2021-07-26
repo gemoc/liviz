@@ -16,6 +16,8 @@ Framework for plotting during a debugging session. Written in pure JavaScript.
 
 This framework allows to display 2D curves in GNU Plot format (https://people.duke.edu/~hpgavin/gnuplot.html) incrementally, using the d3js library. The communication of the curve is done via a websocket chatting with a RabbitMQ server. 
 
+In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
+ 
 ## Content
 
 This repository contains: 
@@ -24,11 +26,12 @@ This repository contains:
 * **Visualizer** : The sources of the plotter written in pure javascript 
 * **Rest** : A rest API written in python allowing to fetch configurable plots 
 
-## Context
 
- In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
+## How to use
 
- ## Incoming Features
+todo
+
+## Incoming Features
 
 - [x] Scatter plot
 - [ ] Line chart
