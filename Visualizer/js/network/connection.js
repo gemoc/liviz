@@ -10,7 +10,7 @@ class Connection
 
     on_receive(d)
     {
-        console.log(d.body);
+        var graphName = d.headers.destination.replace("/queue/", "");
 
         var plotData = new PlotData(d.body);
 
@@ -20,27 +20,8 @@ class Connection
             return;
         }
 
-        /*   var graphName = d.headers.destination.replace("/queue/", "");
-   
-           var jsonData = JSON.parse(d.body);
-   
-           var jsonKeys = Object.keys(jsonData);
-   
-           var variableName = jsonKeys[0];
-   
-           var targetField = jsonKeys[1];//  Object.keys[jsonData]
-   
-           var yDelta = jsonData[variableName];
-   
-           var xDelta = jsonData[targetField];
-   
-           var obj =
-           {
-               date: xDelta,
-               close: yDelta,
-           } */
+        Plotter.onReceive(graphName, plotData);
 
-        Plotter.onReceive(graphName, variableName, obj);
 
     }
     onConnect()

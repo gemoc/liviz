@@ -10,6 +10,33 @@ var PlotData = function (raw)
 
 };
 
+PlotData.prototype.getPlot = function (variableName, xAxisIdentifier)
+{
+    var yDelta = this.data.get(variableName);
+
+    var xDelta = this.data.get(xAxisIdentifier);
+
+    if (xDelta.length != yDelta.length)
+    {
+        console.log("Invalid plot data for variable " + variableName);
+        return null;
+    }
+
+    var result = [];
+
+    for (var i = 0; i < xDelta.length; i++)
+    {
+        var obj =
+        {
+            date: xDelta[i],
+            close: yDelta[i],
+        }
+
+        result.push(obj);
+    }
+
+    return result;
+}
 
 PlotData.prototype.parse = function ()
 {
@@ -31,8 +58,6 @@ PlotData.prototype.parse = function ()
         this.data.set(variableName, []);
     }
 
-
-
     for (var i = 1; i < lines.length; i++)
     {
         var values = lines[i].match(/[^ ]+/g);
@@ -45,8 +70,6 @@ PlotData.prototype.parse = function ()
             this.data.get(variable).push(value);
         }
     }
-
-    console.log(this.data);
 
     this.valid = true;
 }

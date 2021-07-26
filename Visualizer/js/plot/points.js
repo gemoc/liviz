@@ -86,12 +86,10 @@ Points.prototype.redraw = function ()
 
 }
 
-Points.prototype.append = function (variableName, obj)
+Points.prototype.append = function (variableName, data)
 {
-    var color = Settings.getVariableColor(variableName);
-    var data = []
 
-    data.push(obj);
+    var color = Settings.getVariableColor(variableName);
 
     var x = this.x;
     var y = this.y;

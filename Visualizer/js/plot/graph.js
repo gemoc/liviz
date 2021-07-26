@@ -25,7 +25,7 @@ Graph.prototype.initialize = function ()
     throw new Error("Abstract method!");
 }
 
-Graph.prototype.onReceive = function (variableName, obj)
+Graph.prototype.onReceive = function (variableName, data)
 {
     if (!this.data.has(variableName))
     {
@@ -34,18 +34,23 @@ Graph.prototype.onReceive = function (variableName, obj)
     else
     {
         var array = this.data.get(variableName);
-        array.push(obj);
+
+        for (const obj of data)
+        {
+            array.push(obj);
+
+        }
     }
-    this.append(variableName, obj);
+    this.append(variableName, data);
 }
 /**
  @abstract
  */
-Graph.prototype.append = function (variableName, obj)
+Graph.prototype.append = function (variableName, data)
 {
     throw new Error("Abstract method!");
 }
-Graph.prototype.redraw = function (variableName, obj)
+Graph.prototype.redraw = function ()
 {
     throw new Error("Abstract method!");
 }

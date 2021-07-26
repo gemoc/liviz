@@ -29,9 +29,21 @@ class Plotter
         }
     }
 
-    static onReceive(graphName, variableName, obj)
+    static onReceive(graphName, plotData)
     {
-        Plotter.graphs.get(graphName).onReceive(variableName, obj);
+        var graph = Plotter.graphs.get(graphName)
+
+        var graphMeta = graph.getMetadata();
+
+        for (const variableName of graphMeta['variables'])
+        {
+            var data = plotData.getPlot(variableName, graphMeta['x']);
+
+            console.log(variableName);
+
+            graph.onReceive(variableName, data);
+        }
+
     }
 
     static createGraph(indice, graphData)
