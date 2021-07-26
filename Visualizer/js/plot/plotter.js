@@ -39,8 +39,6 @@ class Plotter
         {
             var data = plotData.getPlot(variableName, graphMeta['x']);
 
-            console.log(variableName);
-
             graph.onReceive(variableName, data);
         }
 

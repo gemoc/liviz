@@ -98,7 +98,6 @@ Graph.prototype.addLegend = function ()
 
     i = 0;
 
-
     for (const variableName of variables) 
     {
         var input = d3.select("#legend")
