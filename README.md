@@ -20,9 +20,9 @@ This framework allows to display 2D curves in GNU Plot format (https://people.du
 
 This repository contains: 
 
-* **Scripts/** : Contains linux scripts (.sh) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
-* **Visualizer/** : The sources of the plotter written in pure javascript 
-* **Rest/** : A rest API written in python allowing to fetch configurable plots 
+* **Scripts** : Contains linux scripts (.sh) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
+* **Visualizer** : The sources of the plotter written in pure javascript 
+* **Rest** : A rest API written in python allowing to fetch configurable plots 
 
 ## Context
 
