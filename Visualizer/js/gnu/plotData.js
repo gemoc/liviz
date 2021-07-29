@@ -63,19 +63,17 @@ PlotData.prototype.parse = function ()
         this.data.set(variableName, []);
     }
 
-
     for (var i = 1; i < lines.length; i++)
     {
         var values = lines[i].match(/[^ ]+/g);
 
-        for (var i = 0; i < values.length; i++)
+        for (var j = 0; j < values.length; j++)
         {
-            var variable = variableNames[i];
-            var value = values[i];
+            var variable = variableNames[j];
+            var value = values[j];
 
             this.data.get(variable).push(value);
         }
     }
-
     this.valid = true;
 }
