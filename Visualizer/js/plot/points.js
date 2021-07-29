@@ -7,8 +7,15 @@ var Points = function (name, indice)
 Points.prototype = Object.create(Graph.prototype);
 Points.prototype.constructor = Points;
 
+/**
+ * Create the svg object, create axis
+ * add legend and tooltip. 
+ * All the dynamic parameters of the graph must be created here 
+ */
 Points.prototype.initialize = function ()
 {
+    Graph.prototype.initialize.call(this);
+
     var [xMin, xMax, yMin, yMax] = Settings.getAxisBounds();
 
     // append the svg object to the body of the page
@@ -42,6 +49,10 @@ Points.prototype.initialize = function ()
 
     this.addToolTip();
 
+    /*
+    The path clip is used to prevent data from 
+    being drawn outside the canvas container 
+    */
     this.svg.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("rect")
@@ -49,6 +60,10 @@ Points.prototype.initialize = function ()
         .attr("height", this.height);
 
 }
+/*
+Remove and redraw the svg. This function
+is used when modifiying axis.
+*/
 Points.prototype.redraw = function ()
 {
     this.svg.selectAll("circle").remove();
@@ -60,7 +75,7 @@ Points.prototype.redraw = function ()
     var x = this.x;
     var y = this.y;
 
-    for (const variableName of variables) 
+    for (const variableName of variables)
     {
         data = this.data.get(variableName);
 
@@ -84,7 +99,6 @@ Points.prototype.redraw = function ()
 
 Points.prototype.append = function (variableName, data)
 {
-
     var color = Settings.getVariableColor(variableName);
 
     var x = this.x;
@@ -102,7 +116,6 @@ Points.prototype.append = function (variableName, data)
         .attr("clip-path", "url(#clip)")
         .attr("r", 3)
 }
-
 
 Points.prototype.addToolTip = function ()
 {
@@ -149,10 +162,6 @@ Points.prototype.addToolTip = function ()
         {
             div.style("display", "none");
         })
-
-
-
-
     });
 }
 

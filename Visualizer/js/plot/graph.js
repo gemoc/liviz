@@ -2,6 +2,7 @@
 
 
 /**
+ * This class represent one graph SVG
  @constructor
  @abstract
  */
@@ -15,22 +16,26 @@ var Graph = function (name, indice)
     this.name = name;
     this.indice = indice;
 
-    this.parent = d3.select("#container").append(this.name);
 
-    this.margin = { top: 50, right: 30, bottom: 30, left: 60 },
-        this.width = document.getElementById("container").offsetWidth * 0.95 - this.margin.left - this.margin.right,
-        this.height = 400 - this.margin.top - this.margin.bottom;
 
     this.data = new Map();
 
 };
 
 /**
- @abstract
+ * Called when the Graph object is created.
+ * This method will create the parent html division related to graph
+ * and the margin property.
+ *
+ @abstract 
  */
 Graph.prototype.initialize = function ()
 {
-    throw new Error("Abstract method!");
+    this.parent = d3.select("#container").append(this.name);
+
+    this.margin = { top: 50, right: 30, bottom: 30, left: 60 },
+        this.width = document.getElementById("container").offsetWidth * 0.95 - this.margin.left - this.margin.right,
+        this.height = 400 - this.margin.top - this.margin.bottom;
 }
 
 Graph.prototype.onReceive = function (variableName, data)

@@ -1,4 +1,5 @@
 
+
 class Connection 
 {
     constructor()
@@ -21,12 +22,6 @@ class Connection
         }
 
         Plotter.onReceive(graphName, plotData);
-
-
-    }
-    onConnect()
-    {
-
     }
     connect()
     {

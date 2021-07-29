@@ -11,13 +11,9 @@ class Settings
         return document.getElementById("color-" + variableName).value;
     }
 
-
-
     static openFile(e)
     {
-
         var file = e.target.files[0];
-
 
         var reader = new FileReader();
 
