@@ -14,6 +14,10 @@ PlotData.prototype.getPlot = function (variableName, xAxisIdentifier)
 {
     var yDelta = this.data.get(variableName);
 
+    if (yDelta == undefined)
+    {
+        return [];
+    }
     var xDelta = this.data.get(xAxisIdentifier);
 
     if (xDelta.length != yDelta.length)
@@ -46,6 +50,7 @@ PlotData.prototype.parse = function ()
 
     var definition = lines[0].trimStart();
 
+
     if (!definition.startsWith("#"))
     {
         return;
@@ -57,6 +62,7 @@ PlotData.prototype.parse = function ()
     {
         this.data.set(variableName, []);
     }
+
 
     for (var i = 1; i < lines.length; i++)
     {
