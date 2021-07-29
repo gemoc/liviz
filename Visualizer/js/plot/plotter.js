@@ -59,12 +59,9 @@ class Plotter
                 break;
         }
 
-
         return null;
 
     }
-
-
 
     static flush()
     {
@@ -75,9 +72,5 @@ class Plotter
 
         Plotter.graphs = new Map();
     }
-
-
-
-
 
 }
