@@ -7,36 +7,31 @@ var Points = function (name, indice)
 Points.prototype = Object.create(Graph.prototype);
 Points.prototype.constructor = Points;
 
-
 Points.prototype.initialize = function ()
 {
-    const margin = { top: 50, right: 30, bottom: 30, left: 60 },
-        width = document.getElementById("container").offsetWidth * 0.95 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-
     var [xMin, xMax, yMin, yMax] = Settings.getAxisBounds();
 
     // append the svg object to the body of the page
-    this.svg = d3.select("#container")
+    this.svg = this.parent
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", this.width + this.margin.left + this.margin.right)
+        .attr("height", this.height + this.margin.top + this.margin.bottom)
         .append("g")
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+            "translate(" + this.margin.left + "," + this.margin.top + ")");
 
     this.x = d3.scaleLinear()
         .domain([xMin, xMax])
-        .range([0, width]);
+        .range([0, this.width]);
 
     this.xAxis = this.svg.append("g")
-        .attr("transform", "translate(0," + (height + 5) + ")")
+        .attr("transform", "translate(0," + (this.height + 5) + ")")
         .call(d3.axisBottom(this.x));
 
     // Add Y axis
     this.y = d3.scaleLinear()
         .domain([yMin, yMax])
-        .range([height, 0]);
+        .range([this.height, 0]);
 
     this.yAxis = this.svg.append("g")
         .attr("transform", "translate(-5,0)")
@@ -44,13 +39,14 @@ Points.prototype.initialize = function ()
 
 
     this.addLegend();
-    this.addToolTip(margin, width);
+
+    this.addToolTip();
 
     this.svg.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("rect")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", this.width)
+        .attr("height", this.height);
 
 }
 Points.prototype.redraw = function ()
@@ -108,18 +104,22 @@ Points.prototype.append = function (variableName, data)
 }
 
 
-Points.prototype.addToolTip = function (margin, width)
+Points.prototype.addToolTip = function ()
 {
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
-        .attr("x", width - 300)
+        .attr("x", this.width - 300)
         .attr("y", 0)
         .style("opacity", 0);
 
 
     var svg = this.svg;
 
-    d3.select("#container").on("mousemove", function ()
+    var margin = this.margin;
+
+    var width = this.width;
+
+    this.parent.on("mousemove", function ()
     {
         // Récupération de la position X & Y de la souris.
         var mouse_x = d3.mouse(this)[0];

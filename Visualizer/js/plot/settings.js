@@ -50,7 +50,6 @@ class Settings
             graph.rescale(xMin, xMax, yMin, yMax);
         }
 
-
         document.getElementById('openPlot')
             .addEventListener('change', Settings.openFile, false);
     }

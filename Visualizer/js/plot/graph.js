@@ -1,3 +1,6 @@
+
+
+
 /**
  @constructor
  @abstract
@@ -12,6 +15,11 @@ var Graph = function (name, indice)
     this.name = name;
     this.indice = indice;
 
+    this.parent = d3.select("#container").append(this.name);
+
+    this.margin = { top: 50, right: 30, bottom: 30, left: 60 },
+        this.width = document.getElementById("container").offsetWidth * 0.95 - this.margin.left - this.margin.right,
+        this.height = 400 - this.margin.top - this.margin.bottom;
 
     this.data = new Map();
 
@@ -71,9 +79,9 @@ Graph.prototype.rescale = function (xMin, xMax, yMin, yMax)
 
 Graph.prototype.remove = function ()
 {
-    d3.select("svg").remove();
-    d3.select("#legend").selectAll("input").remove();
-    d3.select("#legend").selectAll("label").remove();
+    this.parent.select("svg").remove();
+    this.parent.selectAll("input").remove();
+    this.parent.selectAll("label").remove();
     this.data = new Map();
 }
 
@@ -86,13 +94,34 @@ Graph.prototype.addSettings = function ()
 {
     // todo
 }
+
+Graph.prototype.addVariable = function (variableName, color)
+{
+    var input = this.parent
+        .append("input")
+        .attr("id", "color-" + variableName)
+        .attr("name", "color-" + variableName)
+        .attr("type", "color")
+        .attr("value", color)
+
+        .on("change", function (d)
+        {
+            var graph = Plotter.graphs.values().next().value;
+            graph.redraw();
+        });
+
+    input.style("margin-left", this.margin.left + "px")
+
+    this.parent
+        .append("label")
+        .attr("for", "color-" + variableName)
+        .style("margin-left", "10px")
+        .html(variableName)
+}
 Graph.prototype.addLegend = function ()
 {
     const defaultColors = ["#FF0000", "#0000ff", "#008000", "#992277", "#11ffee"];
 
-    const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 300,
-        height = 100 - margin.top - margin.bottom;
 
     var graph = this.getMetadata();
 
@@ -102,38 +131,7 @@ Graph.prototype.addLegend = function ()
 
     for (const variableName of variables) 
     {
-        var input = d3.select("#legend")
-
-            .append("input")
-            .attr("id", "color-" + variableName)
-            .attr("name", "color-" + variableName)
-            .attr("type", "color")
-            .attr("value", defaultColors[i])
-
-            .on("change", function (d)
-            {
-                var graph = Plotter.graphs.values().next().value;
-                graph.redraw();
-            });
-
-
-        if (i == 0)
-        {
-            input.style("margin-left", margin.left + "px")
-        }
-        else
-        {
-            input.style("margin-left", "10px")
-        }
-
-        div = input.select(function () { return this.parentNode; })
-
-        div
-            .append("label")
-            .attr("for", "color-" + variableName)
-            .style("margin-left", "10px")
-            .html(variableName)
-
+        this.addVariable(variableName, defaultColors[i]);
         i++;
     }
 }
