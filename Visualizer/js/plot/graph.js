@@ -72,6 +72,8 @@ Graph.prototype.rescale = function (xMin, xMax, yMin, yMax)
 Graph.prototype.remove = function ()
 {
     d3.select("svg").remove();
+    d3.select("#legend").selectAll("input").remove();
+    d3.select("#legend").selectAll("label").remove();
     this.data = new Map();
 }
 
