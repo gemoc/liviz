@@ -1,14 +1,13 @@
 # Liviz
 
-Framework for plotting during a debugging session. Written in pure JavaScript.
+Framework for plotting during a debugging session. Written in VanillaJS
 
 ## Require
-
-* RabbitMQ 3.8.19
-* StompJs
+ 
+* RabbitMQ 3.8.19 (Docker setup recommended)
+* StompJs 6.1.0
 * D3Js v4
-* Bootstrap v5.0.1
-
+* Bootstrap 5.0.1
 
 ## Incremental Plotter
 
@@ -22,7 +21,7 @@ In this context, it is used to follow the evolution of the value of variables re
 
 This repository contains: 
 
-* **Scripts** : Contains linux scripts (.sh) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
+* **Scripts** : Contains linux scripts (sudo required) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
 * **Visualizer** : The sources of the plotter written in pure javascript 
 * **Rest** : A rest API written in python allowing to fetch configurable plots 
 * **Example Files** : Examples of GnuPlot files that can be displayed using the javascript viewer. 
@@ -31,8 +30,3 @@ This repository contains:
 
 > Installation guide required
 > Release & Dockerization required
-
-
-
-
-
