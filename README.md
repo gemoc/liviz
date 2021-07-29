@@ -25,7 +25,7 @@ This repository contains:
 * **Scripts** : Contains linux scripts (.sh) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
 * **Visualizer** : The sources of the plotter written in pure javascript 
 * **Rest** : A rest API written in python allowing to fetch configurable plots 
-
+* **Example Files** : Examples of GnuPlot files that can be displayed using the javascript viewer. 
 
 ## How to use
 
