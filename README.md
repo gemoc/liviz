@@ -29,16 +29,5 @@ This repository contains:
 
 ## How to use
 
-todo
-
-## Incoming Features
-
-- [x] Scatter plot
-- [ ] Line chart
-- [ ] Box plot
-- [ ] GNUPlot Export
-- [ ] SVG Export
-- [ ] Sliding Window
-- [x] Resizing axes (zoom, unzoom)
-- [ ] Smart data handling (caching, archiving, access etc)
+> Installation guide required
 
