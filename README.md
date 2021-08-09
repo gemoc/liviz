@@ -1,8 +1,8 @@
 # Liviz
 
-Framework for plotting during a debugging session. The renderer is written in VanillaJS. This renderer is provided by a rest API using NodeJs and ExpressJS
+Framework for plotting during a debugging session. The plotter is written in VanillaJS and is provided by a Rest API using NodeJs and ExpressJS.
 
-## Require
+## Dependencies
  
 * RabbitMQ 3.8.19 (Docker setup recommended)
 * StompJs 6.1.0
@@ -20,7 +20,6 @@ This framework allows to display 2D curves in GNU Plot format (https://people.du
 
 In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
-
 ![](Misc/rd.png)
  
 ## Content
@@ -28,16 +27,21 @@ In this context, it is used to follow the evolution of the value of variables re
 This repository contains: 
 
 * **Scripts** : Contains linux scripts (sudo required) allowing to launch rabbitmq and the plugins necessary for the proper functioning of StompJs
-* **Visualizer** : The sources of the plotter written in pure javascript 
-* **Rest** : A rest API written in python allowing to fetch configurable plots 
-* **Example Files** : Examples of GnuPlot files that can be displayed using the javascript viewer. 
+* **Source** : The sources of the rest API
+* **Source/html** : The sources of the plotter
+* **Misc** : Some random files related to the project (images, rawdata etc)
 
 ## How to use
 
-you can launch the Rest Api by executing this command: 
+1. Install all the dependencies
+2. Run all scripts in the **Scripts** folder (sudo).
+3. Launch the Rest API using this command : 
 
 ```
 node Sources/app.js.
 ```
+
+
+
 
 > Release & Dockerization required
