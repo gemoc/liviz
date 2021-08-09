@@ -15,6 +15,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
+
 dist/
 downloads/
 eggs/
@@ -156,5 +157,9 @@ cython_debug/
 # Ignore all local history of files
 .history
 .ionide
+
+### Node js
+
+node_modules/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode

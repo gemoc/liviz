@@ -1,0 +1,11 @@
+{
+    "name": "liviz-api",
+    "version": "1.0.0",
+    "description": "The liviz framework api.",
+    "main": "app.js",
+    "author": "Skinz3",
+    "license": "None",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
