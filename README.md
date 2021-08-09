@@ -1,6 +1,6 @@
 # Liviz
 
-Framework for plotting during a debugging session. Written in VanillaJS
+Framework for plotting during a debugging session. The renderer is written in VanillaJS. This renderer is provided by a rest API using NodeJs and ExpressJS
 
 ## Require
  
@@ -8,6 +8,9 @@ Framework for plotting during a debugging session. Written in VanillaJS
 * StompJs 6.1.0
 * D3Js v4
 * Bootstrap 5.0.1
+* node 14.17.1
+* npm 6.14.13
+* express js *(npm install express --save)*
 
 ## Incremental Plotter
 
@@ -31,7 +34,8 @@ This repository contains:
 
 ## How to use
 
-You can start the REST api by running this command
+you can launch the Rest Api by executing this command: 
+
 ```
 node Sources/app.js.
 ```
