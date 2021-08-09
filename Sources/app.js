@@ -7,7 +7,6 @@ var app = express();
 
 var config = undefined;
 
-
 var htmlPath = path.join(__dirname, 'html');
 
 app.use(express.static(htmlPath));
@@ -18,14 +17,15 @@ app.listen(port, () =>
 
     app.get("/config", (req, res, next) =>
     {
-        res.json(config);
-        // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
+        res.send("hello get config.");
+
     });
 
 
     app.put("/config", (req, res, next) =>
     {
         console.log(req);
+        res.send("hello post config.");
     });
 
 });

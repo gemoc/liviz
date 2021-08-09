@@ -42,6 +42,4 @@ node Sources/app.js.
 ```
 
 
-
-
 > Release & Dockerization required
