@@ -31,5 +31,9 @@ This repository contains:
 
 ## How to use
 
-> Installation guide required
+You can start the REST api by running this command
+```
+node Sources/app.js.
+```
+
 > Release & Dockerization required
