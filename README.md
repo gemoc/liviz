@@ -10,7 +10,10 @@ Framework for plotting during a debugging session. The plotter is written in Van
 * Bootstrap 5.0.1
 * node 14.17.1
 * npm 6.14.13
-* express js *(npm install express --save)*
+
+* express js ```npm install express --save```
+* body-parser ```npm i body-parser```
+* uuid ```npm i uuid```
 
 ## Incremental Plotter
 
