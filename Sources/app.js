@@ -8,11 +8,9 @@ var bodyParser = require('body-parser')
 const { v4: uuidv4 } = require('uuid');
 
 
-
 var app = express();
 var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
-
 
 /* The current config */
 var config = null;
@@ -38,15 +36,18 @@ app.listen(port, () =>
 
     });
 
-
     app.post('/config', jsonParser, function (req, res)
     {
         config = req.body;
+
+        if (config == null || config == undefined)
+        {
+            res.sendStatus(400);
+        }
+
         mapQueues();
         res.sendStatus(201); // Created
-
     })
-
 
     app.get("/graph", (req, res) =>
     {
@@ -63,8 +64,14 @@ app.listen(port, () =>
 
     });
 
-});
+    app.post('/data', jsonParser, function (req, res)
+    {
+        config = req.body;
+        mapQueues();
+        res.sendStatus(201); // Created
+    })
 
+});
 
 function mapQueues()
 {

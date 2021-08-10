@@ -45,7 +45,6 @@
     <meta charset="utf-8" />
 
     <script src="js/lib/stomp.js"></script>
-
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
 
@@ -56,7 +55,8 @@
     <script src="js/plot/graph.js"></script>
     <script src="js/gnu/plotData.js"></script>
     <script src="js/plot/points.js"></script>
-    <script src="js/network/connection.js"></script>
+    <script src="js/network/networkManager.js"></script>
+    <script src="js/network/utils.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel='stylesheet' type='text/css'>
 
@@ -84,13 +84,12 @@
     </div>
 
 
-
-
     <script>
 
         Settings.bindEvents();
-        var connection = new Connection();
-        connection.connect()
+
+        networkManager = new NetworkManager();
+        networkManager.initialize();
 
     </script>
 
