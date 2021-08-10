@@ -5,12 +5,11 @@ Framework for plotting during a debugging session. The plotter is written in Van
 ## Dependencies
  
 * RabbitMQ 3.8.19 (Docker setup recommended)
-* StompJs 6.1.0
+* StompJs 6.1.0 (included)
 * D3Js v4
-* Bootstrap 5.0.1
+* Bootstrap 5.0.1 (included)
 * node 14.17.1
 * npm 6.14.13
-
 * express js ```npm install express --save```
 * body-parser ```npm i body-parser```
 * uuid ```npm i uuid```

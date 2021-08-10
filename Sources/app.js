@@ -5,6 +5,9 @@ const port = 3000;
 var path = require('path');
 var express = require("express");
 var bodyParser = require('body-parser')
+const { v4: uuidv4 } = require('uuid');
+
+
 
 var app = express();
 var jsonParser = bodyParser.json()
@@ -22,7 +25,7 @@ app.listen(port, () =>
 {
     console.log("Server running on port " + port);
 
-    app.get("/config", (req, res, next) =>
+    app.get("/config", (req, res) =>
     {
         if (config != null)
         {
@@ -40,10 +43,26 @@ app.listen(port, () =>
     {
         config = req.body;
         mapQueues();
-
         res.sendStatus(201); // Created
 
     })
+
+
+    app.get("/graph", (req, res) =>
+    {
+        var graphName = req.query.name;
+
+        if (graphMapping.has(graphName))
+        {
+            res.send(graphMapping.get(graphName));
+        }
+        else
+        {
+            res.sendStatus(404);
+        }
+
+    });
+
 });
 
 
@@ -55,8 +74,8 @@ function mapQueues()
 
     for (const graph of graphs) 
     {
-        var name = graph.name;
-
-        console.log(graph);
+        var uid = uuidv4();
+        graphMapping.set(graph.name, uid);
+        console.log(graph.name + " : " + uid);
     }
 }
