@@ -7,9 +7,7 @@ class NetworkManager
         this.ws = new WebSocket('ws://127.0.0.1:15674/ws');
         this.client = Stomp.over(this.ws);
         this.client.debug = null
-
     }
-
 
     requestConfig()
     {
@@ -32,7 +30,6 @@ class NetworkManager
         Plotter.initialize();
 
         this.connectWebSocket();
-
 
     }
 

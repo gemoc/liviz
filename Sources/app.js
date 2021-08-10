@@ -36,7 +36,7 @@ app.listen(port, () =>
 
     });
 
-    app.post('/config', jsonParser, function (req, res)
+    app.put('/config', jsonParser, function (req, res)
     {
         config = req.body;
 
@@ -64,7 +64,7 @@ app.listen(port, () =>
 
     });
 
-    app.post('/data', jsonParser, function (req, res)
+    app.put('/data', jsonParser, function (req, res)
     {
         config = req.body;
         mapQueues();
