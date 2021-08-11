@@ -59,7 +59,6 @@ class NetworkManager
 
                 this.client.subscribe("/amq/queue/" + graphData['name'],
                     this.onReceiveData);
-
             }
         };
 

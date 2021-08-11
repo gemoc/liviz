@@ -6,6 +6,9 @@ var path = require('path');
 var express = require("express");
 var bodyParser = require('body-parser')
 const { v4: uuidv4 } = require('uuid');
+var stomp = require('@stomp/stompjs');
+Object.assign(global, { WebSocket: require('websocket').w3cwebsocket });
+
 
 
 var app = express();
@@ -17,6 +20,17 @@ var htmlPath = path.join(__dirname, 'html');
 var config = null;
 /* Mapping between graph name and rabbitMQ queues */
 var graphMapping = new Map();
+
+
+
+
+
+const client = new stomp.Client();
+client.brokerURL = 'ws://localhost:15674/ws';
+
+client.activate();
+console.log(client.brokerURL);
+
 
 app.use(express.static(htmlPath));
 
