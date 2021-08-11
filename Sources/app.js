@@ -12,6 +12,7 @@ var app = express();
 var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
 
+
 /* The current config */
 var config = null;
 /* Mapping between graph name and rabbitMQ queues */
