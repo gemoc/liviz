@@ -1,7 +1,10 @@
 
-/* The API port */
+/* Constants */
 const port = 3000;
+const webSocketUrl = 'ws://localhost:15674/ws';
 
+
+/* Requires */
 var path = require('path');
 var express = require("express");
 var bodyParser = require('body-parser')
@@ -9,21 +12,22 @@ const { v4: uuidv4 } = require('uuid');
 var stomp = require('@stomp/stompjs');
 Object.assign(global, { WebSocket: require('websocket').w3cwebsocket });
 
+
+
+
+/* Members decarations */
+var config = null;
+var graphMapping = new Map();
+
 var app = express();
 var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
+const client = new stomp.Client();
+client.brokerURL = webSocketUrl;
 
-
-/* The current config */
-var config = null;
-/* Mapping between graph name and rabbitMQ queues */
-var graphMapping = new Map();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(htmlPath));
-
-const client = new stomp.Client();
-client.brokerURL = 'ws://localhost:15674/ws';
 
 
 client.onConnect = function (frame)
@@ -32,7 +36,6 @@ client.onConnect = function (frame)
     // Do something, all subscribes must be done is this callback
     // This is needed because this will be executed after a (re)connect
 };
-
 
 client.onStompError = function (frame)
 {
@@ -70,6 +73,7 @@ app.listen(port, () =>
         if (config == null || config == undefined)
         {
             res.sendStatus(400);
+            return;
         }
 
         mapQueues();
@@ -79,11 +83,6 @@ app.listen(port, () =>
     app.get("/graph", (req, res) =>
     {
         var graphName = req.query.name;
-
-
-        console.log("requesting uuid");
-        console.log(graphName);
-
 
         if (graphMapping.has(graphName))
         {
@@ -100,6 +99,8 @@ app.listen(port, () =>
     {
         var graphName = req.body.graphName;
 
+        console.log(graphName);
+
         if (!graphMapping.has(graphName))
         {
             res.sendStatus(404);
@@ -111,7 +112,7 @@ app.listen(port, () =>
         var graphUUID = graphMapping.get(graphName);
 
         client.publish({
-            destination: '/amq/queue/' + graphName,
+            destination: '/amq/queue/' + 'myGrapha',
             body: data,
         });
 

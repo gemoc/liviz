@@ -32,10 +32,11 @@ class NetworkManager
 
             Plotter.mapping.set(graphName, uuid);
 
-            console.log("Subscribed to " + graphName);
-
-            this.client.subscribe("/amq/queue/" + graphName,
+            this.client.subscribe("/amq/queue/" + "myGrapha",
                 this.onReceiveData);
+
+            console.log("Subscribed to " + graphName + " (" + uuid + ")");
+
         }
 
 
@@ -61,6 +62,7 @@ class NetworkManager
 
     onReceiveData(d)
     {
+        console.log("We received new data.");
 
         var graphName = d.headers.destination.replace("/queue/", "");
 
