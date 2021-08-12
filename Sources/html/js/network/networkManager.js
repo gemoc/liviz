@@ -28,7 +28,7 @@ class NetworkManager
 
             var graphName = graphData['name'];
 
-            var uuid = Utils.httpGet(url + "?name=" + graphName);
+            var uuid = Utils.httpGet(url + "/" + graphName);
 
             Plotter.mapping.set(uuid, graphName);
 

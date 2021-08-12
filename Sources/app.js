@@ -84,9 +84,9 @@ app.listen(port, () =>
         res.sendStatus(201); // Created
     })
 
-    app.get("/graph", (req, res) =>
+    app.get("/graph/:name", (req, res) =>
     {
-        var graphName = req.query.name;
+        var graphName = req.params.name;
 
         if (graphMapping.has(graphName))
         {
@@ -116,7 +116,6 @@ app.listen(port, () =>
         var graphUUID = graphMapping.get(graphName);
 
         amqpChannel.sendToQueue(graphUUID, Buffer.from(data));
-
 
         res.sendStatus(200); // Ok
 
