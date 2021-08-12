@@ -36,7 +36,6 @@ var onConnect = function (error, connection)
 
 };
 
-
 amqp.connect('amqp://localhost', onConnect);
 
 /* Members decarations */
@@ -46,7 +45,6 @@ var graphMapping = new Map();
 var app = express();
 var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
-
 
 
 app.use(bodyParser.urlencoded({ extended: true }));

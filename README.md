@@ -23,9 +23,11 @@ This framework allows to display 2D curves in GNU Plot format (https://people.du
 
 In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
-![](Misc/rd.png)
+![](Misc/sequence diagram.png)
 
 ![](Misc/api.png)
+
+
  
 ## Content
 
