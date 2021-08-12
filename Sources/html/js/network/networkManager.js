@@ -4,7 +4,7 @@ class NetworkManager
 
     constructor()
     {
-        this.ws = new WebSocket('ws://127.0.0.1:15674/ws');
+        this.ws = new WebSocket('ws://localhost:15674/ws');
         this.client = Stomp.over(this.ws);
         this.client.debug = null
     }
@@ -32,7 +32,7 @@ class NetworkManager
 
             Plotter.mapping.set(graphName, uuid);
 
-            this.client.subscribe("/amq/queue/" + "myGrapha",
+            this.client.subscribe("/amq/queue/" + "myGraph",
                 this.onReceiveData);
 
             console.log("Subscribed to " + graphName + " (" + uuid + ")");
