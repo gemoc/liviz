@@ -133,5 +133,9 @@ function mapQueues()
     {
         var uid = uuidv4();
         graphMapping.set(graph.name, uid);
+
+        console.log(uid);
     }
+
+    console.log("Graph(s) mapped.");
 }
