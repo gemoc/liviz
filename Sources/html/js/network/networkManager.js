@@ -16,9 +16,35 @@ class NetworkManager
         Utils.httpGetAsync(url, this.onConfigReceive.bind(this), this.onConfigError.bind(this));
     }
 
+    bindQueues()
+    {
+        var url = NetworkManager.API_URI + "graph";
+
+        var graphs = Plotter.config['graphs'];
+
+        for (let i = 0; i < graphs.length; i++)
+        {
+            var graphData = graphs[i];
+
+            var graphName = graphData['name'];
+
+            var uuid = Utils.httpGet(url + "?name=" + graphName);
+
+            Plotter.mapping.set(graphName, uuid);
+
+            console.log("Subscribed to " + graphName);
+
+            this.client.subscribe("/amq/queue/" + graphName,
+                this.onReceiveData);
+        }
+
+
+
+    }
+
     onConfigError(statusCode)
     {
-        console.log("unable to retreive config");
+        console.log("Unable to retreive configuration.");
     }
     onConfigReceive(body)
     {
@@ -35,6 +61,7 @@ class NetworkManager
 
     onReceiveData(d)
     {
+
         var graphName = d.headers.destination.replace("/queue/", "");
 
         var plotData = new PlotData(d.body);
@@ -53,14 +80,9 @@ class NetworkManager
     {
         var on_connect = function ()
         {
-            for (let i = 0; i < Plotter.config['graphs'].length; i++)
-            {
-                var graphData = Plotter.config['graphs'][i];
+            this.bindQueues();
 
-                this.client.subscribe("/amq/queue/" + graphData['name'],
-                    this.onReceiveData);
-            }
-        };
+        }.bind(this);
 
         var on_error = function (error)
         {

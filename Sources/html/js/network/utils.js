@@ -1,5 +1,12 @@
 class Utils
 {
+    static httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
     static httpGetAsync(theUrl, callback, error)
     {
         var xmlHttp = new XMLHttpRequest();

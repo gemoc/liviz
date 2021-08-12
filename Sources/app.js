@@ -9,8 +9,6 @@ const { v4: uuidv4 } = require('uuid');
 var stomp = require('@stomp/stompjs');
 Object.assign(global, { WebSocket: require('websocket').w3cwebsocket });
 
-
-
 var app = express();
 var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
@@ -21,9 +19,8 @@ var config = null;
 /* Mapping between graph name and rabbitMQ queues */
 var graphMapping = new Map();
 
-
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(htmlPath));
 
 const client = new stomp.Client();
 client.brokerURL = 'ws://localhost:15674/ws';
@@ -48,9 +45,6 @@ client.onStompError = function (frame)
 };
 
 client.activate();
-
-
-app.use(express.static(htmlPath));
 
 app.listen(port, () =>
 {
@@ -86,6 +80,11 @@ app.listen(port, () =>
     {
         var graphName = req.query.name;
 
+
+        console.log("requesting uuid");
+        console.log(graphName);
+
+
         if (graphMapping.has(graphName))
         {
             res.send(graphMapping.get(graphName));
@@ -97,13 +96,32 @@ app.listen(port, () =>
 
     });
 
-    app.put('/graph', jsonParser, function (req, res)
+    app.put('/graph', function (req, res)
     {
-        config = req.body;
-        res.sendStatus(201); // Created
+        var graphName = req.body.graphName;
+
+        if (!graphMapping.has(graphName))
+        {
+            res.sendStatus(404);
+            return;
+        }
+
+        var data = req.body.data;
+
+        var graphUUID = graphMapping.get(graphName);
+
+        client.publish({
+            destination: '/amq/queue/' + graphName,
+            body: data,
+        });
+
+        res.sendStatus(200); // Ok
+
+        console.log("Send " + graphUUID);
     })
 
 });
+
 
 function mapQueues()
 {
@@ -115,6 +133,5 @@ function mapQueues()
     {
         var uid = uuidv4();
         graphMapping.set(graph.name, uid);
-        console.log(graph.name + " : " + uid);
     }
 }

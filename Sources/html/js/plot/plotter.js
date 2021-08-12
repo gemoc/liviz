@@ -4,6 +4,7 @@ class Plotter
     static data = []
     static config = null;
     static graphs = []
+    static mapping = new Map()
 
     constructor()
     {
