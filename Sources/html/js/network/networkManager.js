@@ -30,9 +30,9 @@ class NetworkManager
 
             var uuid = Utils.httpGet(url + "?name=" + graphName);
 
-            Plotter.mapping.set(graphName, uuid);
+            Plotter.mapping.set(uuid, graphName);
 
-            this.client.subscribe("/amq/queue/" + "myGraph",
+            this.client.subscribe("/amq/queue/" + uuid,
                 this.onReceiveData);
 
             console.log("Subscribed to " + graphName + " (" + uuid + ")");
@@ -57,14 +57,13 @@ class NetworkManager
         Plotter.initialize();
 
         this.connectWebSocket();
-
     }
 
     onReceiveData(d)
     {
-        console.log("We received new data.");
+        var uuid = d.headers.destination.replace("/queue/", "");
 
-        var graphName = d.headers.destination.replace("/queue/", "");
+        var graphName = Plotter.mapping.get(uuid);
 
         var plotData = new PlotData(d.body);
 

@@ -115,10 +115,7 @@ app.listen(port, () =>
 
         var graphUUID = graphMapping.get(graphName);
 
-
-
-
-        amqpChannel.sendToQueue(graphName, Buffer.from(data));
+        amqpChannel.sendToQueue(graphUUID, Buffer.from(data));
 
 
         res.sendStatus(200); // Ok
@@ -140,12 +137,9 @@ function mapQueues()
         var uid = uuidv4();
         graphMapping.set(graph.name, uid);
 
-
-        amqpChannel.assertQueue(graph.name, {
+        amqpChannel.assertQueue(uid, {
             durable: false
         });
-
-
 
         console.log(graph.name + " mapped to " + uid);
     }
