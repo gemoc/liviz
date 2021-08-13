@@ -22,19 +22,15 @@ Framework for plotting during a debugging session. The plotter is written in Van
 
 ![](https://i.ibb.co/G2pbQbV/index.png)
 
-This framework allows to display 2D curves in GNU Plot format (https://people.duke.edu/~hpgavin/gnuplot.html) incrementally, using the d3js library. The communication of the curve is done via a websocket chatting with a RabbitMQ server. 
+* This framework allows to display 2D curves in GNU Plot format (https://people.duke.edu/~hpgavin/gnuplot.html) incrementally, using the d3js library. The communication of the curve is done via a websocket chatting with a RabbitMQ server. 
 
-In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
-
-The data exchanged between the model and the plotter goes through a Rest API accessible in ```Sources/``` written in NodeJs. It is possible to send a plot configuration, and append data to the graphs. Below is a sequence diagram showing the correct order of requests to send to the API. 
+* The data exchanged between the model and the plotter goes through a Rest API accessible in ```Sources/``` written in NodeJs. It is possible to send a plot configuration, and append data to the graphs. Below is a sequence diagram showing the correct order of requests to send to the API. You can find exemples of api calls in ```Scripts/API/```
 
 ![](Misc/sequence.png)
 
 ![](Misc/api.png)
 
-
-Exemple request to API : ``` curl -d '{"graphs":[{"variables":["maVariable","var2"],"window":"0","name":"myGraph","x":"time","type":"points"}]}' -H "Content-Type:text/plain" -X PUT http://localhost:3000/config ```
-
+* For now, this plotter is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
  
 ## Content
@@ -46,15 +42,21 @@ This repository contains:
 * **Source/html** : The sources of the plotter
 * **Misc** : Some random files related to the project (images, rawdata etc)
 
-## How to use
+## Exemple of usage
 
 1. Install all the dependencies
 2. Run all scripts in the **Scripts** folder (sudo).
+
 3. Launch the Rest API using this command : 
 
 ```
 node Sources/app.js.
 ```
 
+4. Run ```Scripts/API/conf.sh```
+
+5. Run ```Script/API/data.sh ```
+
+6. The plotter result is accessible at ``` http://localhost:3000 ```
 
 > Release & Dockerization required
