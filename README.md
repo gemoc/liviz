@@ -7,10 +7,10 @@
  | **URL**        |  **Method**           | **Description**  | **Error handling**|
 | ------------- |:-------------:| -----:|-----:|
 | /    | GET | Returns a plotter as an html page |
-| /config | PUT | Define or replace the configuration and generate queues UUIds | Returns **400 (Bad Request)** if the configuration is malformated
-| /config | GET | Returns the configuration of the instance (json) | Returns **404 (Not found)** If no configuration has been specified 
-| /graphs/{name} | GET | Returns the UId of the queue according to the name of the graph. | Returns **404 (Not found)** If the graph does not exist 
-| /graphs/{name} | PUT | Append graph data to the specified graph.|  Returns **404 (Not found)** If the graph does not exist 
+| /config | PUT | Define or replace the configuration and generate queues UUIds | Returns 400 (Bad Request) if the configuration is malformated
+| /config | GET | Returns the configuration of the instance (json) | Returns 404 (Not found) If no configuration has been specified 
+| /graphs/{name} | GET | Returns the UId of the queue according to the name of the graph. | Returns 404 (Not found) If the graph does not exist 
+| /graphs/{name} | PUT | Append graph data to the specified graph.|  Returns 404 (Not found) If the graph does not exist 
 
 * For now, this plotter is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
