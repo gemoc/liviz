@@ -79,8 +79,11 @@ class NetworkManager
 
     connectWebSocket()
     {
+        console.log("Connecting to RabbitMQ...");
+
         var on_connect = function ()
         {
+            console.log("Connected to RabbitMQ.");
             this.bindQueues();
 
         }.bind(this);
