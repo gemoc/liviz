@@ -9,7 +9,7 @@ Liviz Framework for plotting during a debugging session. The plotter is written 
 * The data exchanged between the model and the plotter goes through a Rest API accessible in ```Sources/``` written in NodeJs. It is possible to send a plot configuration, and append data to the graphs. Below is a sequence diagram showing the correct order of requests to send to the API. You can find exemples of api calls in ```Scripts/API/```
 
  | URL        |  Method           | Description  | Error handling |
-| ------------- |:-------------:| -----:|
+| ------------- |:-------------:| -----:|-----:|
 | /    | GET | Returns a plotter as an html page |
 | /config | PUT | Define or replace the configuration and generate queues UUIds | Returns 400 (Bad Request) if the configuration is malformated
 | /config | GET | Returns the configuration of the instance (json) | Returns 404 (Not found) If no configuration has been specified 
