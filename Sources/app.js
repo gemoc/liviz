@@ -84,7 +84,7 @@ app.listen(port, () =>
         res.sendStatus(201); // Created
     })
 
-    app.get("/graph/:name", (req, res) =>
+    app.get("/graphs/:name", (req, res) =>
     {
         var graphName = req.params.name;
 
@@ -99,7 +99,7 @@ app.listen(port, () =>
 
     });
 
-    app.put('/graph/:graphName', function (req, res)
+    app.put('/graphs/:graphName', function (req, res)
     {
         var graphName = req.params.graphName;
 
