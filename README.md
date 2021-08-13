@@ -49,6 +49,6 @@ This repository contains:
 3. Launch the Rest API using this command :  ```node Sources/app.js.```
 4. Run ```Scripts/API/conf.sh```
 5. Run ```Script/API/data.sh ```
-6. The plotter result is accessible at ``` http://localhost:3000 ```
+6. The plotter result is accessible at  http://localhost:3000/
 
 > Release & Dockerization required
