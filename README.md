@@ -16,8 +16,9 @@
 
 * Below is a sequence diagram showing the order in which the requests must be made. 
 
-![](Misc/sequence.png)
-
+<p align="center" width="100%">
+    <img src="Misc/sequence.png">
+</p>
  
 ## Content
 
