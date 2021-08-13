@@ -4,22 +4,19 @@ Framework for plotting during a debugging session. The plotter is written in Van
 
 ## Dependencies
  
- | Tables        | Are           | Cool  |
+ | Name        | Version           | Install  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| RabbitMQ (Docker setup recommanded)      | 3.8.19 | https://www.rabbitmq.com/download.html |
+| StompJs      | 6.1.0      |   Included |
+| AMQP | ?     |   ```npm install amqplib``` |
+| D3Js | 4.0 | Included |
+| Bootstrap | 5.0.1 | Included |
+| node | 14.17.1 | https://nodejs.org/en/download/ |
+| Npm | 6.14.13 | Installed with nodejs |
+| ExpressJs | ? | ```npm install express --save``` |
+| body-parser | ? | ```npm i body-parser``` |
+| uuid | ? | ```npm i uuid``` |
 
-* RabbitMQ 3.8.19 (Docker setup recommended)
-* StompJs 6.1.0 (Included)
-* AMQP ```npm install amqplib```
-* D3Js v4
-* Bootstrap 5.0.1 (included)
-* node 14.17.1
-* npm 6.14.13
-* express js ```npm install express --save```
-* body-parser ```npm i body-parser```
-* uuid ```npm i uuid```
 
 ## Incremental Plotter
 
