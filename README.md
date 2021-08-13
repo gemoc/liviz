@@ -14,8 +14,6 @@
 | /graphs/{name} | GET | Returns the UId of the queue according to the name of the graph. | Returns 404 (Not found) If the graph does not exist 
 | /graphs/{name} | PUT | Append graph data to the specified graph.|  Returns 404 (Not found) If the graph does not exist 
 
-* Below is a sequence diagram showing the order in which the requests must be made. 
-
 <p align="center" width="100%">
     <img src="Misc/sequence.png">
 </p>
