@@ -26,9 +26,14 @@ This framework allows to display 2D curves in GNU Plot format (https://people.du
 
 In this context, it is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
 
+The data exchanged between the model and the plotter goes through a Rest API accessible in ```Sources/``` written in NodeJs. It is possible to send a plot configuration, and append data to the graphs. Below is a sequence diagram showing the correct order of requests to send to the API. 
+
 ![](Misc/sequence.png)
 
 ![](Misc/api.png)
+
+
+Exemple request to API : ``` curl -d '{"graphs":[{"variables":["maVariable","var2"],"window":"0","name":"myGraph","x":"time","type":"points"}]}' -H "Content-Type:text/plain" -X PUT http://localhost:3000/config ```
 
 
  
