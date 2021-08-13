@@ -4,6 +4,12 @@ Framework for plotting during a debugging session. The plotter is written in Van
 
 ## Dependencies
  
+ | Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 * RabbitMQ 3.8.19 (Docker setup recommended)
 * StompJs 6.1.0 (Included)
 * AMQP ```npm install amqplib```
