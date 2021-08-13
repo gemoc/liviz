@@ -8,14 +8,14 @@ Framework for plotting during a debugging session. The plotter is written in Van
 | ------------- |:-------------:| -----:|
 | RabbitMQ (Docker setup recommanded)      | 3.8.19 | https://www.rabbitmq.com/download.html |
 | StompJs      | 6.1.0      |   Included |
-| AMQP | ?     |   ```npm install amqplib``` |
-| D3Js | 4.0 | Included |
-| Bootstrap | 5.0.1 | Included |
 | node | 14.17.1 | https://nodejs.org/en/download/ |
 | Npm | 6.14.13 | Installed with nodejs |
-| ExpressJs | ? | ```npm install express --save``` |
-| body-parser | ? | ```npm i body-parser``` |
-| uuid | ? | ```npm i uuid``` |
+| AMQP | /     |   ```npm install amqplib``` |
+| ExpressJs | / | ```npm install express --save``` |
+| body-parser | / | ```npm i body-parser``` |
+| uuid | /  | ```npm i uuid``` |
+| D3Js | 4.0 | Included |
+| Bootstrap | 5.0.1 | Included |
 
 
 ## Incremental Plotter
