@@ -1,7 +1,9 @@
 # Liviz
 
 > Liviz Framework for plotting during a debugging session. The plotter is written in VanillaJS and is provided by a Rest API using NodeJs and ExpressJS.
- * This framework allows to display 2D curves in GNU Plot format (https://people.duke.edu/~hpgavin/gnuplot.html) incrementally, using the d3js library. The communication of the curve is done via a websocket chatting with a RabbitMQ server. 
+
+ * This framework allows to display 2D curves in GNU Plot format (https://people.duke.edu/~hpgavin/gnuplot.html) incrementally, using the d3js library. The communication of the curve is done via a websocket chatting with a RabbitMQ server. For now, this plotter is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
+
  * The data exchanged between the model and the plotter goes through a Rest API accessible in ```Sources/``` written in NodeJs. It is possible to send a plot configuration, and append data to the graphs. You can find exemples of api calls in ```Scripts/API/```
 
  | **URL**        |  **Method**           | **Description**  | **Error handling**|
@@ -12,7 +14,9 @@
 | /graphs/{name} | GET | Returns the UId of the queue according to the name of the graph. | Returns 404 (Not found) If the graph does not exist 
 | /graphs/{name} | PUT | Append graph data to the specified graph.|  Returns 404 (Not found) If the graph does not exist 
 
-* For now, this plotter is used to follow the evolution of the value of variables resulting from the interpretation of a nablab program. The interpreter communicates the values which will be plotted in real time by the framework. 
+* Below is a sequence diagram showing the order in which the requests must be made. 
+
+![](Misc/sequence.png)
 
  
 ## Content
