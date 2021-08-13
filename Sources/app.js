@@ -43,11 +43,10 @@ var config = null;
 var graphMapping = new Map();
 
 var app = express();
-var jsonParser = bodyParser.json()
 var htmlPath = path.join(__dirname, 'html');
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text({ extended: true }));
 app.use(express.static(htmlPath));
 
 
@@ -70,7 +69,9 @@ app.listen(port, () =>
 
     app.put('/config', function (req, res)
     {
-        config = JSON.parse(req.body.config);
+        console.log(req.body);
+
+        config = JSON.parse(req.body);
         console.log(config);
 
         if (config == null || config == undefined)
@@ -98,11 +99,9 @@ app.listen(port, () =>
 
     });
 
-    app.put('/graph', function (req, res)
+    app.put('/graph/:graphName', function (req, res)
     {
-        var graphName = req.body.graphName;
-
-        console.log(graphName);
+        var graphName = req.params.graphName;
 
         if (!graphMapping.has(graphName))
         {
@@ -110,7 +109,9 @@ app.listen(port, () =>
             return;
         }
 
-        var data = req.body.data;
+        var data = req.body;
+
+        console.log(data);
 
         var graphUUID = graphMapping.get(graphName);
 
@@ -118,7 +119,6 @@ app.listen(port, () =>
 
         res.sendStatus(200); // Ok
 
-        console.log("Send " + graphUUID);
     })
 
 });
