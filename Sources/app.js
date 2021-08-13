@@ -68,9 +68,10 @@ app.listen(port, () =>
 
     });
 
-    app.put('/config', jsonParser, function (req, res)
+    app.put('/config', function (req, res)
     {
-        config = req.body;
+        config = JSON.parse(req.body.config);
+        console.log(config);
 
         if (config == null || config == undefined)
         {
