@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: liviz.eclipse.ui
+Bundle-SymbolicName: org.gemoc.liviz.eclipse.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: GEmOC
+Automatic-Module-Name: org.gemoc.liviz.eclipse.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui
+Import-Package: javax.inject
