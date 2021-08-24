@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class Http {
 	
-	public static void Get(String uri,Map<String,String> parameters) throws UnsupportedEncodingException, IOException
+	public static void Send(String uri,String method,Map<String,String> parameters) throws UnsupportedEncodingException, IOException
 	{
 		URL url = new URL(uri);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("GET");
+		con.setRequestMethod(method);
 		
 		con.setDoOutput(true);
 		DataOutputStream out = new DataOutputStream(con.getOutputStream());

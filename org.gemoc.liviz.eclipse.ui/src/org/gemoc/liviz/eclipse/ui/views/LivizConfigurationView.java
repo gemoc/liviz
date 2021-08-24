@@ -83,8 +83,7 @@ public class LivizConfigurationView extends ViewPart {
 	    column.pack();
 	    
 
-	
-	      
+
 	      
 	    // Create five table editors for color
 	    TableEditor[] colorEditors = new TableEditor[5];
