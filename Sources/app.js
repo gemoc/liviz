@@ -20,7 +20,6 @@ var onConnect = async function (error, connection)
 {
     if (error != null)
     {
-
         await new Promise(resolve => setTimeout(resolve, 5000));
         console.log("Waiting for stomp module...");
         amqp.connect('amqp://rabbitmq', onConnect);

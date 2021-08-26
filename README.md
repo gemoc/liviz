@@ -51,4 +51,8 @@ This repository contains:
 5. Run ```Script/API/data.sh ```
 6. The plotter result is accessible at  http://localhost:3000/
 
-> Release & Dockerization required
+## Docker
+
+1. Install docker (https://docs.docker.com/engine/install/)
+2. Install docker compose (https://docs.docker.com/compose/install/)
+3. Run the command ``` sudo docker-compose up ``` at the repository root.
