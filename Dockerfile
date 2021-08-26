@@ -2,6 +2,7 @@
 
 FROM node:14.17.1
 
+
 ENV NODE_ENV=production
 
 WORKDIR .
@@ -12,15 +13,27 @@ ADD Scripts Scripts/
 #RUN chmod 0755 Sources/
 ADD Sources Sources/
 
-EXPOSE 80
-
 
 RUN npm install --production
 
 
-CMD Scripts/rabbitmq.sh # rmq docker
-CMD Scripts/plugins.sh # stomp
+RUN npm install amqplib@0.8.0
+RUN npm install express@4.17.1 --save
+RUN npm install uuid@8.3.2
 
-CMD Sources/run.sh # rest api
 
 
+
+ # web api port
+EXPOSE 3000
+
+
+
+# web api
+CMD node Sources/app.js 
+
+
+
+
+
+#CMD rabbitmq rabbitmq-plugins enable rabbitmq_web_stomp
