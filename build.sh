@@ -1,2 +1,2 @@
-sudo docker build -t myimage -f Dockerfile .
+sudo DOCKER_BUILDKIT=1 docker build -t myimage -f Dockerfile .
 

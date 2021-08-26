@@ -1,9 +1,10 @@
+# syntax=docker/dockerfile:1
 
-# FROM nginx:latest
-FROM scratch
+FROM node:14.17.1
 
+ENV NODE_ENV=production
 
-WORKDIR /home/marius/Bureau/liviz
+WORKDIR .
 
 #RUN chmod 0755 Scripts/
 ADD Scripts Scripts/
@@ -14,5 +15,12 @@ ADD Sources Sources/
 EXPOSE 80
 
 
-CMD Sources/start.sh
+RUN npm install --production
+
+
+CMD Scripts/rabbitmq.sh # rmq docker
+CMD Scripts/plugins.sh # stomp
+
+CMD Sources/run.sh # rest api
+
 
