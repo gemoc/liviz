@@ -1,12 +1,31 @@
 version: "3.9"  # optional since v1.27.0
 services:
-  liviz:
+  webapp:
     build: .
+   # depends_on:
+   #  rabbitmq:
+   #    condition: service_healthy
+    links: 
+        - rabbitmq
     ports:
       - "3000:3000"
+    expose:
+      - "5672"
     volumes:
       - .:/code
   rabbitmq:
-    image : rabbitmq
-    
-
+    image : dubc/rabbitmq-alpine-all-plugins
+    expose: 
+      - "15674"
+      - "15672"
+      - "5672"
+    ports : 
+      - "15674:15674"
+      - "15672:15672"
+      - "5672:5672"
+    # healthcheck:
+    #    test: ["CMD", "curl", "-f", "http://localhost:15672"]
+    #    interval: 30s
+    #    timeout: 10s
+    #    retries: 5
+     

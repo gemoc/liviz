@@ -3,7 +3,6 @@
 const port = 3000;
 const webSocketUrl = 'ws://localhost:15674/ws';
 
-
 /* Requires */
 var path = require('path');
 var express = require("express");
@@ -15,11 +14,16 @@ var amqp = require('amqplib/callback_api');
 
 amqpChannel = null;
 
-var onConnect = function (error, connection)
+console.log("Starting WebApi...");
+
+var onConnect = async function (error, connection)
 {
     if (error != null)
     {
-        console.log(error);
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        console.log("Waiting for stomp module...");
+        amqp.connect('amqp://rabbitmq', onConnect);
         return;
     }
 
@@ -36,7 +40,10 @@ var onConnect = function (error, connection)
 
 };
 
-amqp.connect('amqp://localhost', onConnect);
+
+
+amqp.connect('amqp://rabbitmq', onConnect);
+
 
 /* Members decarations */
 var config = null;
@@ -48,6 +55,7 @@ var htmlPath = path.join(__dirname, 'html');
 
 app.use(bodyParser.text({ extended: true }));
 app.use(express.static(htmlPath));
+
 
 
 app.listen(port, () =>
