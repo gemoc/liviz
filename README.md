@@ -44,9 +44,7 @@ This repository contains:
 
 ## Exemple of usage
 
-1. Install all the dependencies
-2. Run all scripts in the ```Scripts/``` folder (sudo).
-3. Launch the Rest API using this command :  ```node Sources/app.js.```
+1. Run Liviz using docker compose
 4. Run ```Scripts/API/conf.sh```
 5. Run ```Script/API/data.sh ```
 6. The plotter result is accessible at  http://localhost:3000/
