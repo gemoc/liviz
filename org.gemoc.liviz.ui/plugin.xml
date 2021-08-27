@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+     
+       <category
+            id="org.eclipse.gemoc.executionframework.ui.category"
+            name="Gemoc">
+      </category>
+     
+       <view
+            category="org.eclipse.gemoc.executionframework.ui.category"
+            class="org.gemoc.liviz.ui.views.LivizView"
+            icon="icons/IconeGemocModel-16.png"
+            id="org.gemoc.liviz.ui.views.LivizView"
+            name="LivizView">
+      </view>
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="org.gemoc.liviz.ui.views.LivizView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.ProblemView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+  
+     
+
+   <extension
+         point="org.eclipse.gemoc.gemoc_language_workbench.engine_addon_group">
+         <addonGroup
+            name="General"
+            id="General.AddonGroup">
+      </addonGroup>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.debug.ui.DebugPerspective">
+         <viewShortcut
+               id="org.gemoc.liviz.ui.views.LivizView">
+         </viewShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.sirius.ui.tools.perspective.modeling">
+         <viewShortcut
+               id="org.gemoc.liviz.ui.views.LivizView">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
+   
+   
+    
+   <extension point="org.eclipse.gemoc.gemoc_language_workbench.engine_addon">
+    <addon
+          addonGroupId="General.AddonGroup"
+          class="org.gemoc.liviz.ui.views.LivizEngineAddon"
+          default="false"
+          id="org.eclipse.gemoc.trace.gemoc.traceaddon"
+          name="Liviz"
+          openViewIds="org.gemoc.liviz.ui.views.LivizView"
+          shortDescription="Live plotter for a debugging session">
+       <addon_booleanOption
+             defaultValue="false"
+             id="org.eclipse.gemoc.trace.gemoc.addon_booleanOption"
+             name="Equivalency classes computing"
+             shortDescription="Activate equivalency classes computing during trace recording (warning this is time consumming on long running models that don&apos;t have equivalent states)">
+       </addon_booleanOption>
+    </addon>
+  </extension>
+  
+</plugin>
