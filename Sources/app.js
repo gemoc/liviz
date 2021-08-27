@@ -1,7 +1,7 @@
 
 /* Constants */
 const port = 3000;
-const webSocketUrl = 'ws://localhost:15674/ws';
+const host = 'amqp://rabbitmq'
 
 /* Requires */
 var path = require('path');
@@ -22,7 +22,7 @@ var onConnect = async function (error, connection)
     {
         await new Promise(resolve => setTimeout(resolve, 5000));
         console.log("Waiting for stomp module...");
-        amqp.connect('amqp://rabbitmq', onConnect);
+        amqp.connect(host, onConnect);
         return;
     }
 
@@ -41,7 +41,7 @@ var onConnect = async function (error, connection)
 
 
 
-amqp.connect('amqp://rabbitmq', onConnect);
+amqp.connect(host, onConnect);
 
 
 /* Members decarations */
@@ -94,6 +94,8 @@ app.listen(port, () =>
     app.get("/graphs/:name", (req, res) =>
     {
         var graphName = req.params.name;
+
+        console.log(graphName);
 
         if (graphMapping.has(graphName))
         {

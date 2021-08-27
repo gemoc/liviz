@@ -18,7 +18,7 @@ class NetworkManager
 
     bindQueues()
     {
-        var url = NetworkManager.API_URI + "graph";
+        var url = NetworkManager.API_URI + "graphs";
 
         var graphs = Plotter.config['graphs'];
 
