@@ -52,5 +52,16 @@ This repository contains:
 ## Docker
 
 1. Install docker (https://docs.docker.com/engine/install/)
-2. Install docker compose (https://docs.docker.com/compose/install/)
-3. Run the command ``` sudo docker-compose up ``` at the repository root.
+
+
+2. Install docker compose using this command :
+
+```sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/```
+
+3. Run the command ```sudo chmod +x /usr/local/bin/docker-compose```
+
+4. Run the command ``` sudo docker-compose up ``` at the repository root.
+
+
+
+
