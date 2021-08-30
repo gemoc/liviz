@@ -2,16 +2,13 @@ class NetworkManager
 {
     static API_URI = "http://localhost:3000/";
 
-    constructor()
-    {
 
-    }
+
 
     requestConfig()
     {
         console.log("Waiting for configuration ... ")
-        var url = NetworkManager.API_URI + "config";
-        Utils.httpGetAsync(url, this.onConfigReceive.bind(this), this.onConfigError.bind(this));
+        Utils.httpGetAsync(NetworkManager.API_URI + "config", this.onConfigReceive.bind(this), this.onConfigError.bind(this));
     }
 
     bindQueues()
@@ -41,9 +38,13 @@ class NetworkManager
 
     }
 
-    onConfigError(statusCode)
+    async onConfigError(statusCode)
     {
         console.log("Unable to retreive configuration.");
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        Utils.httpGetAsync(NetworkManager.API_URI + "config", this.onConfigReceive.bind(this), this.onConfigError.bind(this));
     }
     onConfigReceive(body)
     {
