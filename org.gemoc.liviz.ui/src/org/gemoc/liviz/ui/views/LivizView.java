@@ -56,6 +56,8 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	
 	private Table table;
 	
+	private Button[] variablesInput;
+	
 	@Override
 	public void dispose() 
 	{
@@ -82,9 +84,22 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	        @Override
 	        public void handleEvent(Event event)
 	        {
+	        	StringBuilder builder = new StringBuilder();
+	        	
+	        	for (Button checkbox : variablesInput)
+	        	{
+	        		String variableName = checkbox.getText();
+	        		
+	        		if (checkbox.getSelection())
+	        		{
+	        			builder.append("\""+variableName+"\"");
+	        		}
+	        	}
+	        		
 	        		try 
 	        		{
-						WebApi.putConfiguration("{\"graphs\":[{\"variables\":[\"maVariable\",\"var2\"],\"window\":\"0\",\"name\":\"myGraph\",\"x\":\"time\",\"type\":\"points\"}]}");
+	        			var configuration = "{\"graphs\":[{\"variables\":["+builder.toString()+"],\"window\":\"0\",\"name\":\"myGraph\",\"x\":\"time\",\"type\":\"points\"}]}";
+						WebApi.putConfiguration(configuration);
 					} 
 	        		catch (IOException e)
 	        		{
@@ -104,22 +119,22 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	    TableEditor[] colorEditors = new TableEditor[variables.size()];
 
 	    // Create five buttons for changing color
-	    Button[] colorButtons = new Button[variables.size()];
+	    this.variablesInput = new Button[variables.size()];
 	    
 		  for (int i = 0; i < variables.size(); i++) 
 		    {
 		      final TableItem item = new TableItem(table, SWT.NONE);
 		      colorEditors[i] = new TableEditor(table);
-		      colorButtons[i] = new Button(table, SWT.CHECK);
+		      variablesInput[i] = new Button(table, SWT.CHECK);
 
-		      colorButtons[i].setText(variables.get(i));
-		      colorButtons[i].computeSize(SWT.DEFAULT, table.getItemHeight());
+		      variablesInput[i].setText(variables.get(i));
+		      variablesInput[i].computeSize(SWT.DEFAULT, table.getItemHeight());
 
 		      colorEditors[i].grabHorizontal = true;
-		      colorEditors[i].minimumHeight = colorButtons[i].getSize().y;
-		      colorEditors[i].minimumWidth = colorButtons[i].getSize().x;
+		      colorEditors[i].minimumHeight = variablesInput[i].getSize().y;
+		      colorEditors[i].minimumWidth = variablesInput[i].getSize().x;
 
-		      colorEditors[i].setEditor(colorButtons[i], item, 0);
+		      colorEditors[i].setEditor(variablesInput[i], item, 0);
 		
 		    }
 	}
@@ -156,7 +171,15 @@ public class LivizView extends EngineSelectionDependentViewPart {
 					notifier.addListener(new ITraceListener() 
 					{
 						@Override
-						public void valuesAdded(List<Value<?>> values) {}
+						public void valuesAdded(List<Value<?>> values) 
+						{
+							for (Value<?> value : values)
+							{
+								String refers = traceExtractor.getDimensionLabel((Dimension<?>) value.eContainer());
+								
+								System.out.println("refers"+refers);
+							}
+						}
 						
 						@Override
 						public void stepsStarted(List<Step<?>> steps) {}

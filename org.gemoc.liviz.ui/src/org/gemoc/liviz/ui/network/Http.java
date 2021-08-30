@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 public class Http  
 {
 
-	public static void put(String url,Map<String,String> arguments) throws IOException	
+	public static void put(String url,String content) throws IOException	
 	{
 		URL uri = new URL(url);
 		URLConnection con = uri.openConnection();
@@ -23,17 +23,12 @@ public class Http
 		http.setRequestMethod("PUT");
 		http.setDoOutput(true);
 		
-
-		StringJoiner sj = new StringJoiner("&");
-		for(Map.Entry<String,String> entry : arguments.entrySet())
-		    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
-		         + URLEncoder.encode(entry.getValue(), "UTF-8"));
-		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+		byte[] out =  content.getBytes(StandardCharsets.UTF_8);
 		int length = out.length;
 		
 		
 		http.setFixedLengthStreamingMode(length);
-		http.setRequestProperty("Content-Type", "application/text-plain; charset=UTF-8");
+		http.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");
 		http.connect();
 		
 		try(OutputStream os = http.getOutputStream()) 
@@ -41,6 +36,8 @@ public class Http
 		    os.write(out);
 	
 		}
+		
+		System.out.println("config sended");
 		
 		
 		

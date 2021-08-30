@@ -10,8 +10,8 @@ public class WebApi
 	
 	public static void putConfiguration(String configuration) throws IOException
 	{ 
-		Map<String,String> parameters = new HashMap<String,String>();
-		Http.put(URL+"config",parameters);
+		
+		Http.put("http://localhost:3000/config",configuration);
 		
 	}
 }
