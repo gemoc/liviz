@@ -51,6 +51,8 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	
 	private Button[] variablesInput;
 	
+	private int stepId = 0;
+	
 	@Override
 	public void dispose() 
 	{
@@ -174,7 +176,10 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						}
 						
 						@Override
-						public void stepsStarted(List<Step<?>> steps) {}
+						public void stepsStarted(List<Step<?>> steps) 
+						{
+							stepId++;
+						}
 						
 						@Override
 						public void stepsEnded(List<Step<?>> steps) {}
@@ -185,6 +190,8 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						@Override
 						public void dimensionsAdded(List<Dimension<?>> dimensions) 
 						{
+							variables.clear();
+							
 							for (Dimension<?> dimension : dimensions)
 							{
 								variables.add(traceExtractor.getDimensionLabel(dimension));
