@@ -4,9 +4,7 @@ class NetworkManager
 
     constructor()
     {
-        this.ws = new WebSocket('ws://localhost:15674/ws');
-        this.client = Stomp.over(this.ws);
-        this.client.debug = null
+
     }
 
     requestConfig()
@@ -80,6 +78,11 @@ class NetworkManager
     connectWebSocket()
     {
         console.log("Connecting to RabbitMQ...");
+
+        this.ws = new WebSocket('ws://localhost:15674/ws');
+        this.client = Stomp.over(this.ws);
+        this.client.debug = null
+
 
         var on_connect = function ()
         {

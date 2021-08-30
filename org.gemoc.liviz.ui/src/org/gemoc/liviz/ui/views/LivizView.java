@@ -13,9 +13,16 @@ package org.gemoc.liviz.ui.views;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gemoc.executionframework.ui.views.engine.EngineSelectionDependentViewPart;
+import org.eclipse.gemoc.trace.commons.model.generictrace.GenericAttributeValue;
+import org.eclipse.gemoc.trace.commons.model.generictrace.GenericValue;
+import org.eclipse.gemoc.trace.commons.model.generictrace.SingleReferenceValue;
 import org.eclipse.gemoc.trace.commons.model.trace.Dimension;
 import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
@@ -37,6 +44,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.gemoc.liviz.ui.network.WebApi;
+
+import com.google.common.collect.Streams;
 
 
 public class LivizView extends EngineSelectionDependentViewPart {
@@ -140,7 +149,47 @@ public class LivizView extends EngineSelectionDependentViewPart {
 		
 	}
 
-	
+	private Object getVariableValue(Value<?> value)
+	{
+		final String attributeName;
+		
+        if (value instanceof GenericValue) 
+        {
+            if (value instanceof GenericAttributeValue) 
+            {
+                attributeName = "attributeValue";
+            } 
+            else if (value instanceof SingleReferenceValue) 
+            {
+                attributeName = "referenceValue";
+            } 
+            else
+            {
+                attributeName = "referenceValues";
+            }
+        }
+        else
+        {
+        	attributeName = "";
+        }
+       
+        if (attributeName.length() > 0) 
+        {
+            final Optional<EStructuralFeature> attribute = value.eClass().getEAllStructuralFeatures().stream()
+                    .filter(r -> r.getName().equals(attributeName)).findFirst();
+            
+            if (attribute.isPresent()) 
+            {
+            	EObject o = (EObject)value.eGet(attribute.get());
+                
+            return  o.eClass().getEStructuralFeatures().stream().filter(x->x instanceof EAttribute).findFirst()
+              .map(x->(EAttribute)x).map(x->o.eGet(x)).orElse(null);
+               
+            }
+        }
+        
+        return null;
+	}
 	
 	@Override
 	public void engineSelectionChanged(IExecutionEngine<?> engine) 
@@ -169,9 +218,14 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						{
 							for (Value<?> value : values)
 							{
+								
 								String refers = traceExtractor.getDimensionLabel((Dimension<?>) value.eContainer());
 								
-								System.out.println("refers"+refers);
+								if (variables.contains(refers))
+								{
+									System.out.println(getVariableValue(value));
+								}
+								
 							}
 						}
 						
