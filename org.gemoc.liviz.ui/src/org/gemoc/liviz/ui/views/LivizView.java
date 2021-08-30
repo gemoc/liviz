@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.gemoc.liviz.ui.views;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,10 +37,13 @@ import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IActionBars;
+import org.gemoc.liviz.ui.network.WebApi;
 
 
 public class LivizView extends EngineSelectionDependentViewPart {
@@ -72,7 +76,25 @@ public class LivizView extends EngineSelectionDependentViewPart {
 
 	    
 	    
-
+	    Button button = new Button(parent,SWT.PUSH);
+	    button.addListener(SWT.Selection, new Listener()
+	    {
+	        @Override
+	        public void handleEvent(Event event)
+	        {
+	        		try 
+	        		{
+						WebApi.putConfiguration("{\"graphs\":[{\"variables\":[\"maVariable\",\"var2\"],\"window\":\"0\",\"name\":\"myGraph\",\"x\":\"time\",\"type\":\"points\"}]}");
+					} 
+	        		catch (IOException e)
+	        		{
+					
+						e.printStackTrace();
+					}
+	        }
+	    });
+	    
+	    button.setText("Send configuration");
 	}
 
 		
@@ -110,13 +132,10 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	}
 
 	
-
-
 	
 	@Override
 	public void engineSelectionChanged(IExecutionEngine<?> engine) 
 	{
-		
 		variables.clear();
 		
 		if (engine != null) 
@@ -151,7 +170,6 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						@Override
 						public void dimensionsAdded(List<Dimension<?>> dimensions) 
 						{
-					
 							for (Dimension<?> dimension : dimensions)
 							{
 								variables.add(traceExtractor.getDimensionLabel(dimension));

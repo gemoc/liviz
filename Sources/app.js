@@ -9,7 +9,6 @@ var express = require("express");
 var bodyParser = require('body-parser')
 const { v4: uuidv4 } = require('uuid');
 
-
 var amqp = require('amqplib/callback_api');
 
 amqpChannel = null;

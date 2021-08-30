@@ -1,8 +1,8 @@
 
 package org.gemoc.liviz.ui.network;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 public class Http  
 {
 
-	public static String put(String url,Map<String,String> arguments) throws IOException	
+	public static void put(String url,Map<String,String> arguments) throws IOException	
 	{
 		URL uri = new URL(url);
 		URLConnection con = uri.openConnection();
@@ -36,10 +36,10 @@ public class Http
 		http.setRequestProperty("Content-Type", "application/text-plain; charset=UTF-8");
 		http.connect();
 		
-		try(ByteArrayOutputStream os = (ByteArrayOutputStream)http.getOutputStream()) 
+		try(OutputStream os = http.getOutputStream()) 
 		{
 		    os.write(out);
-		    return new String(os.toByteArray(),StandardCharsets.UTF_8);
+	
 		}
 		
 		

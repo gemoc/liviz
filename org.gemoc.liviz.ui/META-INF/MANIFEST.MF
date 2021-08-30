@@ -15,6 +15,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt,
  com.google.gson;bundle-version="2.8.6",
  org.apache.httpcomponents.httpclient;bundle-version="4.5.13",
- org.eclipse.emf.mwe.core
+ org.eclipse.emf.mwe.core,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
 Import-Package: javax.inject,
  org.eclipse.gemoc.example.k3fsm.impl
