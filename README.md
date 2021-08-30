@@ -27,6 +27,9 @@ This repository contains:
 * **Sources/html** : The sources of the plotter
 * **Misc** : Some random files related to the project (images, rawdata etc)
 
+* **org.gemoc.liviz.ui** : A plugin for eclipse (gemoc) to configure liviz.
+* **org.gemoc.liviz.ui** : A plugin for eclipse (gemoc) to render liviz.
+
 ## Dependencies
  
  | Name        | Version           | Install  |

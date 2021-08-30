@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.gemoc.example.k3fsm.impl.FSMImpl;
 import org.eclipse.gemoc.executionframework.ui.views.engine.EngineSelectionDependentViewPart;
 import org.eclipse.gemoc.trace.commons.model.generictrace.GenericTracedObject;
 import org.eclipse.gemoc.trace.commons.model.trace.Dimension;

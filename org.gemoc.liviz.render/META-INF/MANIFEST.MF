@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Render
+Bundle-SymbolicName: org.gemoc.liviz.render;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: GEMOC
+Automatic-Module-Name: org.gemoc.liviz.render
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Import-Package: javax.inject
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.workbench
