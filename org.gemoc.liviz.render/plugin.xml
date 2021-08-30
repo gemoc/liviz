@@ -10,7 +10,7 @@
       <view
             category="org.gemoc.liviz.render"
             class="org.gemoc.liviz.render.views.RenderView"
-            icon="icons/sample.png"
+            icon="icons/IconeGemocModel-16.png"
             id="org.gemoc.liviz.render.views.RenderView"
             inject="true"
             name="RenderView">

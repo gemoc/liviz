@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import org.eclipse.gemoc.executionframework.ui.views.engine.EngineSelectionDependentViewPart;
-import org.eclipse.gemoc.trace.commons.model.generictrace.GenericTracedObject;
 import org.eclipse.gemoc.trace.commons.model.trace.Dimension;
 import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
@@ -25,12 +25,7 @@ import org.eclipse.gemoc.trace.gemoc.api.IMultiDimensionalTraceAddon;
 import org.eclipse.gemoc.trace.gemoc.api.ITraceExtractor;
 import org.eclipse.gemoc.trace.gemoc.api.ITraceListener;
 import org.eclipse.gemoc.trace.gemoc.api.ITraceNotifier;
-import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.widgets.Button;
@@ -41,7 +36,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.ui.IActionBars;
 import org.gemoc.liviz.ui.network.WebApi;
 
 
@@ -75,7 +69,6 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	    column.setText("Variable name");
 	    column.pack();
 
-	    
 	    
 	    Button button = new Button(parent,SWT.PUSH);
 	    button.addListener(SWT.Selection, new Listener()
@@ -208,9 +201,7 @@ public class LivizView extends EngineSelectionDependentViewPart {
 					});
 					
 					this.traceAddon = traceAddon;
-		
-				
-				
+	
 			} 
 		
 		}
