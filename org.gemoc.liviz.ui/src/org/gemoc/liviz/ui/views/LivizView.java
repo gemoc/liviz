@@ -60,6 +60,8 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	
 	private Button[] variablesInput;
 	
+	private List<String> selectedVariables = new ArrayList<String>();
+	
 	private int stepId = 0;
 	
 	@Override
@@ -89,20 +91,29 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	        {
 	        	StringBuilder builder = new StringBuilder();
 	        	
+	        	String prefix = "";
+	        	
 	        	for (Button checkbox : variablesInput)
 	        	{
 	        		String variableName = checkbox.getText();
 	        		
 	        		if (checkbox.getSelection())
 	        		{
+	        			builder.append(prefix);
 	        			builder.append("\""+variableName+"\"");
+	        			prefix = ",";
+	        			
+	        			selectedVariables.add(variableName);
 	        		}
 	        	}
 	        		
 	        		try 
 	        		{
-	        			var configuration = "{\"graphs\":[{\"variables\":["+builder.toString()+"],\"window\":\"0\",\"name\":\"myGraph\",\"x\":\"time\",\"type\":\"points\"}]}";
-						WebApi.putConfiguration(configuration);
+	        			var configuration = "{\"graphs\":[{\"variables\":["+builder.toString()+"],\"window\":\"0\",\"name\":\"myGraph\",\"x\":\"step\",\"type\":\"points\"}]}";
+						
+	        			WebApi.putConfiguration(configuration);
+						
+						System.out.println("Send : "+configuration);
 					} 
 	        		catch (IOException e)
 	        		{
@@ -116,12 +127,22 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	}
 
 		
+	private void clearVariables()
+	{
+		for (Button variableInput : variablesInput)
+		{
+				variableInput.dispose();
+		}
+		
+		variablesInput = new Button[0];
+		variables.clear();
+	}
 	private void displayVariables()
 	{
-	    // Create five table editors for color
+	    
 	    TableEditor[] colorEditors = new TableEditor[variables.size()];
 
-	    // Create five buttons for changing color
+
 	    this.variablesInput = new Button[variables.size()];
 	    
 		  for (int i = 0; i < variables.size(); i++) 
@@ -149,6 +170,7 @@ public class LivizView extends EngineSelectionDependentViewPart {
 		
 	}
 
+	
 	private Object getVariableValue(Value<?> value)
 	{
 		final String attributeName;
@@ -194,7 +216,17 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	@Override
 	public void engineSelectionChanged(IExecutionEngine<?> engine) 
 	{
-		variables.clear();
+		stepId = 0;
+		
+		Display.getDefault().asyncExec(new Runnable() 
+		{
+			 public void run() 
+			 {
+				clearVariables();
+			 }
+		});
+		
+		System.out.println("Engine selection changed !");
 		
 		if (engine != null) 
 		{			
@@ -216,14 +248,32 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						@Override
 						public void valuesAdded(List<Value<?>> values) 
 						{
+							
+							System.out.println("Values added event. ( "+selectedVariables.size()+" variables");
+							
 							for (Value<?> value : values)
 							{
 								
 								String refers = traceExtractor.getDimensionLabel((Dimension<?>) value.eContainer());
 								
-								if (variables.contains(refers))
+								if (selectedVariables.contains(refers))
 								{
-									System.out.println(getVariableValue(value));
+									
+									String raw = "# "+refers+" step\n";
+									raw += getVariableValue(value)+" "+stepId;
+									
+							
+									
+									try 
+									{
+										WebApi.putValues(raw);
+									} 
+									catch (IOException e)
+									{
+									
+										e.printStackTrace();
+									}
+									
 								}
 								
 							}
@@ -244,7 +294,16 @@ public class LivizView extends EngineSelectionDependentViewPart {
 						@Override
 						public void dimensionsAdded(List<Dimension<?>> dimensions) 
 						{
-							variables.clear();
+							
+							Display.getDefault().asyncExec(new Runnable() 
+							{
+								 public void run() 
+								 {
+									 clearVariables();
+								 }
+							});
+							
+							
 							
 							for (Dimension<?> dimension : dimensions)
 							{

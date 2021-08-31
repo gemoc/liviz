@@ -14,4 +14,10 @@ public class WebApi
 		Http.put("http://localhost:3000/config",configuration);
 		
 	}
+
+	public static void putValues(String raw) throws IOException
+	{
+		Http.put("http://localhost:3000/graphs/myGraph",raw);
+		
+	}
 }

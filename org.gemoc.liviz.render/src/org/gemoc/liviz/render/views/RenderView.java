@@ -38,7 +38,7 @@ public class RenderView extends ViewPart
 	{
 		try 
 		{
-	        browser = new Browser(parent, SWT.MOZILLA);
+	        browser = new Browser(parent, SWT.NONE);
 	        browser.setUrl(URL);
 		} 
 		catch (SWTError e) 

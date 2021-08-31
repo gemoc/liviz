@@ -34,8 +34,6 @@ class NetworkManager
 
         }
 
-
-
     }
 
     async onConfigError(statusCode)

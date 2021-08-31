@@ -115,7 +115,11 @@ In order to plot your graphs. It is necessary to send a configuration file to th
 
 4. Run the command ``` sudo docker-compose up ``` at the repository root.
 
->  Run the command ``` sudo docker-compose up --build``` to rebuild liviz.
+## Build
+
+* Run the command ``` sudo docker-compose up --build``` to rebuild liviz api & plotter (server part).
+
+* You can build the eclipse plugins using Gemoc Studio (https://gemoc.org/download.html)
 
 
 ## Exemple of usage

@@ -36,8 +36,7 @@ public class Http
 		    os.write(out);
 	
 		}
-		
-		System.out.println("config sended");
+	
 		
 		
 		
