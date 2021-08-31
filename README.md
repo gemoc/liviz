@@ -51,6 +51,62 @@ This repository contains:
 5. Run ```Script/API/data.sh ```
 6. The plotter result is accessible at  http://localhost:3000/
 
+## Configuration
+
+In order to plot your graphs. It is necessary to send a configuration file to the web api. Here is the diagram of the configuration to send: 
+
+``` 
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "graphs": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "variables": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "window": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "x": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "variables",
+            "window",
+            "name",
+            "x",
+            "type"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "graphs"
+  ]
+}
+```
+
 ## Docker
 
 1. Install docker (https://docs.docker.com/engine/install/)
