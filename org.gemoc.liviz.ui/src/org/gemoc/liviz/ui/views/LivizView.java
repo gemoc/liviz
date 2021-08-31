@@ -131,7 +131,7 @@ public class LivizView extends EngineSelectionDependentViewPart {
 	{
 		for (Button variableInput : variablesInput)
 		{
-				variableInput.dispose();
+			variableInput.dispose();
 		}
 		
 		variablesInput = new Button[0];
