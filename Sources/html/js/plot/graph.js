@@ -100,43 +100,38 @@ Graph.prototype.addSettings = function ()
     // todo
 }
 
-Graph.prototype.addVariable = function (variableName, color)
+Graph.prototype.addVariable = function (parentDiv, variableName, color)
 {
-    var input = this.parent
-        .append("input")
+	parentDiv
+		.append("div")
         .attr("id", "color-" + variableName)
         .attr("name", "color-" + variableName)
-        .attr("type", "color")
-        .attr("value", color)
-
-        .on("change", function (d)
-        {
-            var graph = Plotter.graphs.values().next().value;
-            graph.redraw();
-        });
-
-    input.style("margin-left", this.margin.left + "px")
-
-    this.parent
+        .style("height", "20px")
+        .style("width", "20px")
+        .style("background-color", color)
+        .style("display", "inline-block")
+        .style("margin-left", "10px");
+	
+    parentDiv
         .append("label")
         .attr("for", "color-" + variableName)
         .style("margin-left", "10px")
         .html(variableName)
 }
+
 Graph.prototype.addLegend = function ()
 {
-    const defaultColors = ["#FF0000", "#0000ff", "#008000", "#992277", "#11ffee"];
+    var meta = this.getMetadata();
 
-
-    var graph = this.getMetadata();
-
-    var variables = graph['variables'];
+    var variables = meta['variables'];
 
     i = 0;
+    
+    var parent = this.parent.append("div").style("margin-left", "30px");
 
     for (const variableName of variables) 
     {
-        this.addVariable(variableName, defaultColors[i]);
+        this.addVariable(parent, variableName, meta['colors'][variableName]);
         i++;
     }
 }

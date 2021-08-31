@@ -15,8 +15,10 @@ Points.prototype.constructor = Points;
 Points.prototype.initialize = function ()
 {
     Graph.prototype.initialize.call(this);
+    
+    var meta = this.getMetadata();
 
-    var [xMin, xMax, yMin, yMax] = Settings.getAxisBounds();
+    var [xMin, xMax, yMin, yMax] = meta['bounds'];
 
     // append the svg object to the body of the page
     this.svg = this.parent
@@ -71,6 +73,7 @@ Points.prototype.redraw = function ()
     var meta = this.getMetadata();
 
     var variables = meta['variables'];
+	var colors = meta['colors'];
 
     var x = this.x;
     var y = this.y;
@@ -79,7 +82,7 @@ Points.prototype.redraw = function ()
     {
         data = this.data.get(variableName);
 
-        var color = Settings.getVariableColor(variableName);
+        var color = colors[variableName];
 
         this.svg.selectAll("points")
             .data(data)
@@ -99,7 +102,10 @@ Points.prototype.redraw = function ()
 
 Points.prototype.append = function (variableName, data)
 {
-    var color = Settings.getVariableColor(variableName);
+    var meta = this.getMetadata();
+    var colors = meta['colors'];
+	
+	var color = colors[variableName];
 
     var x = this.x;
     var y = this.y;
@@ -150,7 +156,7 @@ Points.prototype.addToolTip = function ()
         {
             div.style("opacity", .9);
             div.style("display", "block");
-
+            
             div.style("left", (d3.event.pageX + 30) + "px")
                 .style("top", (d3.event.pageY - 60) + "px")
                 .html("<b>x : </b>" + obj.date + "<br>"
