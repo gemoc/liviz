@@ -44,12 +44,7 @@ This repository contains:
 | D3Js | 4.0 | Included |
 | Bootstrap | 5.0.1 | Included |
 
-## Exemple of usage
 
-1. Run Liviz using docker compose
-4. Run ```Scripts/API/conf.sh```
-5. Run ```Script/API/data.sh ```
-6. The plotter result is accessible at  http://localhost:3000/
 
 ## Configuration
 
@@ -107,7 +102,7 @@ In order to plot your graphs. It is necessary to send a configuration file to th
 }
 ```
 
-## Docker
+## Run
 
 1. Install docker (https://docs.docker.com/engine/install/)
 
@@ -120,6 +115,12 @@ In order to plot your graphs. It is necessary to send a configuration file to th
 
 4. Run the command ``` sudo docker-compose up ``` at the repository root.
 
+>  Run the command ``` sudo docker-compose up --build``` to rebuild liviz.
 
 
+## Exemple of usage
 
+1. Run Liviz using docker compose
+4. Run ```Scripts/API/conf.sh```
+5. Run ```Script/API/data.sh ```
+6. The plotter result is accessible at  http://localhost:3000/
